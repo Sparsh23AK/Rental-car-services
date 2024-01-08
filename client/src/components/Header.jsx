@@ -9,7 +9,7 @@ export default function Header() {
         <Link to="/">
           <h1 className="font-bold">Car Rental</h1>
         </Link>
-        <ul className="flex gap-4 text-red-400" >
+        <ul className="flex gap-4 ">
           <Link to="/">
             <li>Home</li>
           </Link>
