@@ -1,12 +1,13 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ErrorPopUp from "./utils/errorPopUp";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -27,6 +28,9 @@ export default function SignUp() {
       if (data.statusCode != 201) {
         setError(true);
         setLoading(false);
+        return;
+      } else {
+        navigate("/sign-in");
       }
     } catch (error) {
       setLoading(false);
@@ -42,9 +46,7 @@ export default function SignUp() {
     <div>
       {!error ? (
         <div className="p-3 max-w-lg mx-auto">
-          <h1 className="text-3xl text-center font-semibold my-7">
-            <span className="text-red-400">Hurry!</span> Sign Up now.
-          </h1>
+          <h1 className="text-3xl text-center font-semibold my-7">Sign Up.</h1>
           <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
             <input
               type="text"
@@ -76,7 +78,7 @@ export default function SignUp() {
           </form>
           <div className="flex gap-2 mt-5">
             <p>Have an account?</p>
-            <Link to="/signIn">
+            <Link to="/sign-in">
               <span className="text-blue-500">Sign In</span>
             </Link>
           </div>
