@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ErrorPopUp from "./utils/errorPopUp";
+import OAuth from "./OAuth/OAuth";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({});
@@ -46,7 +47,7 @@ export default function SignUp() {
     <div>
       {!error ? (
         <div className="p-3 max-w-lg mx-auto">
-          <h1 className="text-3xl text-center font-semibold my-7">Sign Up.</h1>
+          <h1 className="text-3xl text-center font-semibold my-7">Sign Up</h1>
           <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
             <input
               type="text"
@@ -75,6 +76,7 @@ export default function SignUp() {
             >
               {loading ? "Loading..." : "Sign Up"}
             </button>
+            <OAuth />
           </form>
           <div className="flex gap-2 mt-5">
             <p>Have an account?</p>
