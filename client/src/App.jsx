@@ -5,7 +5,7 @@ import About from "./components/About";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import Profile from "./components/Profile";
-import Header from "./components/Header";
+import Header from "./components/common/Header";
 import PrivateRoute from "./components/common/PrivateRoute";
 
 export default function App() {
