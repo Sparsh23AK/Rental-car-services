@@ -1,5 +1,5 @@
-import User from "../models/user.model";
-import errorHandler from "../utils/errorHandler";
+import User from "../models/user.model.js";
+import errorHandler from "../utils/errorHandler.js";
 import bcryptjs from "bcryptjs";
 
 export const user = (req, res) => {
@@ -11,7 +11,7 @@ export const user = (req, res) => {
 //Update User logic
 
 export const updateUser = async (req, res, next) => {
-  if (res.user.id !== req.param.id) {
+  if (req.user.id !== req.params.id) {
     return next(errorHandler(401, "Unauthorized access!"));
   }
 
@@ -21,7 +21,7 @@ export const updateUser = async (req, res, next) => {
     }
 
     const updateData = await User.findByIdAndUpdate(
-      req.param.id,
+      req.params.id,
       {
         $set: {
           username: req.body.username,

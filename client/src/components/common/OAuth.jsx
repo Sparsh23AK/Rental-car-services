@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
-import { app } from "../firebase.js";
+import { app } from "../../firebase.js";
 import { useNavigate } from "react-router-dom";
-import { signInSuccess } from "../redux/user/userSlice";
+import { signInSuccess } from "../../redux/user/userSlice.js";
 import { useDispatch } from "react-redux";
 
 export default function OAuth() {
