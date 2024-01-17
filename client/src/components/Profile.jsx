@@ -2,7 +2,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useRef, useState, useEffect } from "react";
 import ErrorPopUp from "./utils/errorPopUp";
-import SuccessPopUp from "./utils/successPopUp.jsx";
 import { app } from "../firebase.js";
 import {
   getDownloadURL,
@@ -14,6 +13,10 @@ import {
   updateUserFailure,
   updateUserStart,
   updateUserSuccess,
+  deleteUserFailure,
+  deleteUserStart,
+  deleteUserSuccess,
+  signOut
 } from "../redux/user/userSlice.js";
 
 export default function Profile() {
@@ -62,9 +65,12 @@ export default function Profile() {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
+
+  //Updating the USER Details
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      dispatch(updateUserStart());
       const res = await fetch(`/api/user/update/${currentUser._id}`, {
         method: "POST",
         headers: {
@@ -76,12 +82,39 @@ export default function Profile() {
       if (data.success === false) {
         dispatch(updateUserFailure(data));
         return;
-      } else {
-        dispatch(updateUserSuccess(data));
-        setUpdateSuccess(true);
       }
+      dispatch(updateUserSuccess(data));
+      setUpdateSuccess(true);
     } catch (error) {
       dispatch(updateUserFailure(error));
+    }
+  };
+
+  //Deleting the USER's account
+  const handleDeleteAccount = async (e) => {
+    try {
+      dispatch(deleteUserStart());
+      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(deleteUserFailure(data));
+        return;
+      }
+      dispatch(deleteUserSuccess());
+    } catch (error) {
+      dispatch(deleteUserFailure(error));
+    }
+  };
+
+  //Sign out user
+  const handleSignOut = async() => {
+    try {
+      await fetch('api/auth/signout')
+      dispatch(signOut());
+    } catch (error) {
+      console.log(error);      
     }
   };
 
@@ -144,13 +177,26 @@ export default function Profile() {
               type="submit"
               className="bg-slate-700 rounded-lg p-3 text-white uppercase hover:opacity-90 disabled:opacity-80"
             >
-              Update
+              {loading ? "Loading ..." : "Update"}
             </button>
           </form>
           <div className="flex justify-between mt-5">
-            <span className="text-red-700 cursor-pointer">Delete Account</span>
-            <span className="text-red-700 cursor-pointer">Sign Out</span>
+            <span
+              className="text-red-700 cursor-pointer"
+              onClick={handleDeleteAccount}
+            >
+              Delete Account
+            </span>
+            <span
+              onClick={handleSignOut}
+              className="text-red-700 cursor-pointer"
+            >
+              Sign Out
+            </span>
           </div>
+          <p className="text-green-700 mt-5">
+            {updateSuccess && "User details are updated successfully !!"}
+          </p>
         </div>
       ) : (
         <div className="p-3 max-w-lg mx-auto">
