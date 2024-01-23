@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import userRoutes from "./routes/user.route.js";
 import authRoute from "./routes/auth.route.js";
 import cookieParser from "cookie-parser";
+import path from 'path';
 
 dotenv.config();
 
@@ -17,6 +18,13 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+
+const __dirname = path.resolve();
+//for server to initialize
+app.use(express.static(path.join(__dirname, '/client/dist')));
+app.get('*', (req, res)=>{
+  res.sendFile(path.join(__dirname, '/client','dist','index.html'))
+});
 
 app.listen(3000, () => {
   console.log("Server running at port 3000.");
