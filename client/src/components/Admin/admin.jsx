@@ -15,6 +15,7 @@ const AdminDashboard = () => {
   const [uploadPercent, setUploadPercent] = useState(0);
   const [uploadError, setUploadError] = useState(false);
   const [errorAddCar, setAddCarError] = useState(false);
+  const [errorDeleteCar, setDeleteCarError] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     make: "",
@@ -46,7 +47,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/cars/getCars");
+        const response = await fetch("/api/admin/getCars");
         const data = await response.json();
         setCars(data);
         console.log(data);
@@ -105,7 +106,7 @@ const AdminDashboard = () => {
     e.preventDefault();
     // Handle adding car logic here
     try {
-      const response = await fetch("/api/cars/save", {
+      const response = await fetch("/api/admin/save", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -133,6 +134,22 @@ const AdminDashboard = () => {
       ...formData,
       [name]: value,
     });
+  };
+
+  const handleDelete = async (car) => {
+    try{
+      const res = await fetch(`/api/admin/delete/${car._id}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        setDeleteCarError(true);
+        return;
+      }
+      //create Success pop up
+    }catch(error){
+      setDeleteCarError(true);
+    }
   };
 
   return (
@@ -177,7 +194,10 @@ const AdminDashboard = () => {
                 <button className="bg-yellow-500 text-white px-2 py-1 rounded mr-2">
                   <FaEdit />
                 </button>
-                <button className="bg-red-500 text-white px-2 py-1 rounded">
+                <button
+                  className="bg-red-500 text-white px-2 py-1 rounded"
+                  onClick={() => handleDelete(car)}
+                >
                   <FaTrash />
                 </button>
               </td>

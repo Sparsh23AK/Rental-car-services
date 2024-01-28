@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import userRoutes from "./routes/user.route.js";
 import authRoute from "./routes/auth.route.js";
 import carsRoute from "./routes/car.route.js"
+import adminRoute from "./routes/admin.route.js"
 import cookieParser from "cookie-parser";
 import path from 'path';
 
@@ -44,6 +45,9 @@ app.use("/api/auth", authRoute);
 
 //car Route
 app.use('/api/cars', carsRoute);
+
+//admin Route
+app.use('/api/admin', adminRoute);
 
 //Middleware
 app.use((err, req, res, next) => {
