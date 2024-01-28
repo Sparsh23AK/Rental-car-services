@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRoutes from "./routes/user.route.js";
 import authRoute from "./routes/auth.route.js";
+import carsRoute from "./routes/car.route.js"
 import cookieParser from "cookie-parser";
 import path from 'path';
 
@@ -40,6 +41,9 @@ app.use("/api/user", userRoutes);
 
 //Auth Route
 app.use("/api/auth", authRoute);
+
+//car Route
+app.use('/api/cars', carsRoute);
 
 //Middleware
 app.use((err, req, res, next) => {

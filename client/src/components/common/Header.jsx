@@ -7,12 +7,12 @@ export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
 
   return (
-    <div className="bg-slate-200">
+    <div className="bg-white p-3 header">
       <div className="flex justify-between mx-auto max-w-6xl items-center p-3">
         <Link to="/">
-          <h1 className="font-bold">Car Rental</h1>
+          <h1 className="font-bold text-lg text-[#24272c]">Car Rental</h1>
         </Link>
-        <ul className="flex gap-4 ">
+        <ul className="flex gap-4 text-md font-medium text-[#24272c]">
           <Link to="/">
             <li>Home</li>
           </Link>

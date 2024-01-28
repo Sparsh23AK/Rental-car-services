@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* body{
-    background-color: rgba(75, 79, 87, 0.7);
-} */
+.header{
+    box-shadow: 0 3px 6px 0 rgba(36, 39, 44, .1);
+    border-bottom: 1px solid rgba(36, 39, 44, .1);
+    z-index: 1;    
+}
+body{
+    color : rgba(36,39,44,.7)
+}
