@@ -14,6 +14,7 @@ const AdminDashboard = () => {
   const [isAddCarModalOpen, setAddCarModalOpen] = useState(false);
   const [uploadPercent, setUploadPercent] = useState(0);
   const [uploadError, setUploadError] = useState(false);
+  const [errorAddCar, setAddCarError] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     make: "",
@@ -28,20 +29,33 @@ const AdminDashboard = () => {
     image3: null,
   });
 
-  // Fetch cars data from backend (replace with actual fetch logic)
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch('/api/cars'); // Replace with your actual API endpoint
-  //       const data = await response.json();
-  //       setCars(data);
-  //     } catch (error) {
-  //       console.error('Error fetching data:', error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
+  const getInitialFormData = () => ({
+    name: "",
+    make: "",
+    model: "",
+    year: "",
+    transmissionType: "",
+    fuelType: "",
+    mileage: "",
+    status: "",
+    image1: null,
+    image2: null,
+    image3: null,
+  });
+  //Fetch cars data from backend
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/api/cars/getCars");
+        const data = await response.json();
+        setCars(data);
+        console.log(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const handleFileUpload = async (e) => {
     console.log("On change called");
@@ -87,12 +101,30 @@ const AdminDashboard = () => {
     setAddCarModalOpen(false);
   };
 
-  const handleAddCar = (e) => {
+  const handleAddCar = async (e) => {
     e.preventDefault();
     // Handle adding car logic here
-    console.log("Adding car:", formData);
-    // Close the modal after adding car
-    closeAddCarModal();
+    try {
+      const response = await fetch("/api/cars/save", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      if (data.statusCode != 201) {
+        setAddCarError(true);
+        return;
+      } else {
+        setFormData(getInitialFormData());
+        setUploadPercent(0);
+      }
+    } catch (error) {
+      setAddCarError(true);
+    } finally {
+      closeAddCarModal();
+    }
   };
 
   const handleInputChange = (e) => {
@@ -125,16 +157,22 @@ const AdminDashboard = () => {
             <th className="border px-4 py-2">Make</th>
             <th className="border px-4 py-2">Model</th>
             <th className="border px-4 py-2">Year</th>
+            <th className="border px-4 py-2">Transmission Type</th>
+            <th className="border px-4 py-2">Fuel Type</th>
+            <th className="border px-4 py-2">Mileage</th>
             <th className="border px-4 py-2">Actions</th>
           </tr>
         </thead>
         <tbody>
           {cars.map((car) => (
-            <tr key={car._id}>
+            <tr className="text-center" key={car._id}>
               <td className="border px-4 py-2">{car.name}</td>
               <td className="border px-4 py-2">{car.make}</td>
               <td className="border px-4 py-2">{car.model}</td>
               <td className="border px-4 py-2">{car.year}</td>
+              <td className="border px-4 py-2">{car.transmissionType}</td>
+              <td className="border px-4 py-2">{car.fuelType}</td>
+              <td className="border px-4 py-2">{car.mileage}</td>
               <td className="border px-4 py-2">
                 <button className="bg-yellow-500 text-white px-2 py-1 rounded mr-2">
                   <FaEdit />
@@ -219,7 +257,7 @@ const AdminDashboard = () => {
                   type="text"
                   id="year"
                   name="year"
-                  value={formData.name}
+                  value={formData.year}
                   onChange={handleInputChange}
                   required
                   className="mt-1 p-2 w-full border rounded"
@@ -233,15 +271,19 @@ const AdminDashboard = () => {
                 >
                   Transmission Type
                 </label>
-                <input
-                  type="text"
+                <select
                   id="transmissionType"
                   name="transmissionType"
                   value={formData.transmissionType}
                   onChange={handleInputChange}
                   className="mt-1 p-2 w-full border rounded"
-                  placeholder="Transmission Type"
-                />
+                >
+                  <option value="" disabled selected>
+                    Select Transmission type..
+                  </option>
+                  <option value="Automatic">Automatic</option>
+                  <option value="Manual">Manual</option>
+                </select>
               </div>
               <div className="mb-4">
                 <label
@@ -250,14 +292,35 @@ const AdminDashboard = () => {
                 >
                   Fuel Type
                 </label>
-                <input
-                  type="text"
+                <select
                   id="fuelType"
                   name="fuelType"
                   value={formData.fuelType}
                   onChange={handleInputChange}
                   className="mt-1 p-2 w-full border rounded"
-                  placeholder="Fuel Type"
+                >
+                  <option value="" disabled selected>
+                    Select Fuel type..
+                  </option>
+                  <option value="Petrol">Petrol</option>
+                  <option value="Diseal">Diseal</option>
+                </select>
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="mileage"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Mileage
+                </label>
+                <input
+                  type="text"
+                  id="mileage"
+                  name="mileage"
+                  value={formData.mileage}
+                  onChange={handleInputChange}
+                  className="mt-1 p-2 w-full border rounded"
+                  placeholder="Mileage"
                 />
               </div>
               <div className="mb-4">
@@ -274,9 +337,12 @@ const AdminDashboard = () => {
                   onChange={handleInputChange}
                   className="mt-1 p-2 w-full border rounded"
                 >
-                  <option value="Available">Available</option>
-                  <option value="Rented">Rented</option>
-                  <option value="Sold">Sold</option>
+                  <option value="" disabled selected>
+                    Select Status...
+                  </option>
+                  <option value="available">Available</option>
+                  <option value="rented">Rented</option>
+                  <option value="sold">Sold</option>
                 </select>
               </div>
 
@@ -312,7 +378,6 @@ const AdminDashboard = () => {
                   onChange={handleFileUpload}
                   required
                 />
-                
               </div>
 
               <div className="mb-4">

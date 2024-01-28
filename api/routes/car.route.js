@@ -5,7 +5,7 @@ import { deleteCar, saveCar, updateCar, getCarById, getCars } from "../controlle
 const router = express.Router();
 
 //saving car info
-router.post("/save", verfifyToken, saveCar);
+router.post("/save", saveCar);
 
 //update car info
 router.post("/update", verfifyToken, updateCar);

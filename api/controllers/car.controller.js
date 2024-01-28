@@ -1,4 +1,4 @@
-import Car from "../models/car.model";
+import Car from "../models/car.model.js";
 import errorHandler from "../utils/errorHandler.js";
 
 
