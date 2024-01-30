@@ -203,9 +203,9 @@ export default function Profile() {
         </div>
       ) : (
         <div className="p-3 max-w-lg mx-auto">
-          {error ? (
+          {error && (
             <ErrorPopUp message={"Something went wrong!!"} close={closePopUp} />
-          ) : null}
+          ) }
         </div>
       )}
     </div>

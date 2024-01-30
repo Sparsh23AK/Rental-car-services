@@ -11,6 +11,8 @@ import {
 } from "firebase/storage";
 import AddCarForm from "./addCarForm";
 import UpdateCarForm from "./updateCarForm";
+import ErrorPopUp from "../utils/errorPopUp";
+import SuccessPopUp from "../utils/errorPopUp";
 
 const AdminDashboard = () => {
   const [cars, setCars] = useState([]);
@@ -18,6 +20,9 @@ const AdminDashboard = () => {
   const [uploadPercent, setUploadPercent] = useState(0);
   const [uploadError, setUploadError] = useState(false);
   const [errorAddCar, setAddCarError] = useState(false);
+  const [successAddCar, setAddCarSuccess] = useState(false);
+  const [errorUpdateCar, setUpdateCarError] = useState(false);
+  const [successUpdateCar, setUpdateCarSuccess] = useState(false);
   const [errorDeleteCar, setDeleteCarError] = useState(false);
   const [selectedCar, setSelectedCar] = useState({
     _id: "",
@@ -144,6 +149,7 @@ const AdminDashboard = () => {
       } else {
         setFormData(getInitialFormData());
         setUploadPercent(0);
+        setAddCarSuccess(true);
       }
     } catch (error) {
       setAddCarError(true);
@@ -208,14 +214,15 @@ const AdminDashboard = () => {
       });
       const data = await res.json();
       if (data.success === false) {
+        setUpdateCarError(true);
         return;
       }
-      await fetchData();
+      setUpdateCarSuccess(true);
     } catch (error) {
-      console.log(error);
+      setUpdateCarError(true);
     } finally {
-      setUpdateModalOpen(false);
-      setSelectedCar(null);
+      await fetchData();
+      handleUpdateModalClose();
     }
   };
   const handleUpdateModalClose = () => {
@@ -279,6 +286,19 @@ const AdminDashboard = () => {
     } catch (error) {
       console.error("Error deleting file:", error);
     }
+  };
+
+  const closeAddCarErrorPopUp = () => {
+    setAddCarError(false);
+  };
+  const closeSuccessAddCarPopUp = () => {
+    setAddCarSuccess(false);
+  };
+  const closeUpdateCarErrorPopUp = () => {
+    setUpdateCarError(false);
+  };
+  const closeSuccessUpdateCarPopUp = () => {
+    setUpdateCarSuccess(false);
   };
 
   return (
@@ -371,6 +391,32 @@ const AdminDashboard = () => {
             />
           </div>
         </div>
+      )}
+      {/* Error/Sucsess Pop-ups for Adding and Updating  */}
+      {errorAddCar && (
+        <ErrorPopUp
+          message={"Something went wrong while addding!!"}
+          close={closeAddCarErrorPopUp}
+        />
+      )}
+      {successAddCar && (
+        <SuccessPopUp
+          message={"Succesfully Added!!"}
+          close={closeSuccessAddCarPopUp}
+        />
+      )}
+
+      {errorUpdateCar && (
+        <ErrorPopUp
+          message={"Something went wrong while updating!!"}
+          close={closeUpdateCarErrorPopUp}
+        />
+      )}
+      {successUpdateCar && (
+        <SuccessPopUp
+          message={"Succesfully Updated!!"}
+          close={closeSuccessUpdateCarPopUp}
+        />
       )}
     </div>
   );
