@@ -8,7 +8,7 @@ const router = express.Router();
 router.post("/save", verfifyToken, saveCar);
 
 //update car info
-router.post("/update", verfifyToken, updateCar);
+router.post("/update/:id", verfifyToken, updateCar);
 
 //deleting car info by ID
 router.delete("/delete/:id", verfifyToken, deleteCar);

@@ -20,7 +20,7 @@ export default function Header() {
             <li>About</li>
           </Link>
           <Link to="/admin">
-            {currentUser.isAdmin && 
+            {currentUser && currentUser.isAdmin && 
               <li className="text-red-700">Admin</li>
             }
           </Link>

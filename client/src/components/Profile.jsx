@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRef, useState, useEffect } from "react";
 import ErrorPopUp from "./utils/errorPopUp";
 import { app } from "../firebase.js";
+import { useNavigate } from "react-router-dom";
 import {
   getDownloadURL,
   getStorage,
@@ -28,6 +29,7 @@ export default function Profile() {
   const [formData, setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (image) {
@@ -113,6 +115,7 @@ export default function Profile() {
     try {
       await fetch('api/auth/signout')
       dispatch(signOut());
+      navigate("/sign-in")
     } catch (error) {
       console.log(error);      
     }

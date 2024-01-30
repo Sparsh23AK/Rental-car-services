@@ -37,6 +37,7 @@ export const saveCar = async (req, res, next) => {
     try {
       // Retrieve all cars from the database
       const cars = await Car.find();
+      console.log(cars);
   
       res.json(cars);
     } catch (error) {
@@ -66,8 +67,10 @@ export const saveCar = async (req, res, next) => {
   //update car
   export const updateCar = async (req, res, next) => {
     try {
-      const carId = req.params.carId;
-      const updateFields = req.body;
+      const carId = req.params.id;
+      const { _id, ...updateFields} = req.body;
+      console.log("Car Id : ",carId);
+      console.log("req body : ",req.body);
   
       // Update the car in the database
       const updatedCar = await Car.findByIdAndUpdate(carId, updateFields, { new: true });
@@ -86,7 +89,7 @@ export const saveCar = async (req, res, next) => {
   //delete car
   export const deleteCar = async (req, res, next) => {
     try {
-      const carId = req.params.carId;
+      const carId = req.params.id;
   
       // Delete the car from the database
       const deletedCar = await Car.findByIdAndDelete(carId);

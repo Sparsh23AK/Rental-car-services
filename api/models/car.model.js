@@ -7,7 +7,7 @@ const carSchema = new mongoose.Schema({
   year: { type: String, required: true },
   transmissionType: String,
   fuelType: String,
-  mileage: Number,
+  mileage: String,
   status: {
     type: String,
     enum: ["available", "rented", "sold"],
