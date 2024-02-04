@@ -1,5 +1,5 @@
 import express from "express";
-import {  getCarById, getCars } from "../controllers/car.controller.js";
+import {  getCarById, getCars, getBrands } from "../controllers/car.controller.js";
 
 const router = express.Router();
 
@@ -8,5 +8,8 @@ router.get('/getCars', getCars);
 
 //Get Car info by Id
 router.get("/getCarById/:id", getCarById);
+
+//Get brands info
+router.get('/getBrands', getBrands);
 
 export default router;

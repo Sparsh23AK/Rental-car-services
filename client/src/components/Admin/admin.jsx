@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { FaPlus, FaEdit, FaTrash } from "react-icons/fa";
 import { app } from "../../firebase.js";
+import { useDispatch, useSelector } from "react-redux";
 import {
   getDownloadURL,
   getStorage,
@@ -12,7 +13,7 @@ import {
 import AddCarForm from "./addCarForm";
 import UpdateCarForm from "./updateCarForm";
 import ErrorPopUp from "../utils/errorPopUp";
-import SuccessPopUp from "../utils/errorPopUp";
+import SuccessPopUp from "../utils/successPopUp";
 
 const AdminDashboard = () => {
   const [cars, setCars] = useState([]);
@@ -24,16 +25,20 @@ const AdminDashboard = () => {
   const [errorUpdateCar, setUpdateCarError] = useState(false);
   const [successUpdateCar, setUpdateCarSuccess] = useState(false);
   const [errorDeleteCar, setDeleteCarError] = useState(false);
+  const { brands } = useSelector((state) => state.brand);
+
   const [selectedCar, setSelectedCar] = useState({
     _id: "",
     name: "",
-    make: "",
+    brand: "",
     model: "",
     year: "",
     transmissionType: "",
     fuelType: "",
     mileage: "",
     status: "",
+    rental_price: 0,
+    price: 0,
     image1: null,
     image2: null,
     image3: null,
@@ -46,13 +51,15 @@ const AdminDashboard = () => {
   const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
-    make: "",
+    brand: "",
     model: "",
     year: "",
     transmissionType: "",
     fuelType: "",
     mileage: "",
     status: "",
+    rental_price: 0,
+    price: 0,
     image1: null,
     image2: null,
     image3: null,
@@ -60,13 +67,15 @@ const AdminDashboard = () => {
 
   const getInitialFormData = () => ({
     name: "",
-    make: "",
+    brand: "",
     model: "",
     year: "",
     transmissionType: "",
     fuelType: "",
     mileage: "",
     status: "",
+    rental_price: 0,
+    price: 0,
     image1: null,
     image2: null,
     image3: null,
@@ -160,10 +169,12 @@ const AdminDashboard = () => {
   };
 
   const handleInputChange = (name, value) => {
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    console.log(name, value);
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+
   };
 
   const handleDelete = async (car) => {
@@ -316,30 +327,34 @@ const AdminDashboard = () => {
       </div>
 
       {/* Dynamic Table */}
-      <table className="table-auto justify-between w-5/6 items-center mx-auto">
+      <table className="table-auto justify-between mx-auto  items-center">
         <thead>
           <tr>
-            <th className="border px-4 py-2">Name</th>
-            <th className="border px-4 py-2">Make</th>
-            <th className="border px-4 py-2">Model</th>
-            <th className="border px-4 py-2">Year</th>
-            <th className="border px-4 py-2">Transmission Type</th>
-            <th className="border px-4 py-2">Fuel Type</th>
-            <th className="border px-4 py-2">Mileage</th>
-            <th className="border px-4 py-2">Actions</th>
+            <th className="border-2 border-gray-700 px-4 py-2">Name</th>
+            <th className="border-2 border-gray-700 px-4 py-2">Brand</th>
+            <th className="border-2 border-gray-700 px-4 py-2">Model</th>
+            <th className="border-2 border-gray-700 px-4 py-2">Year</th>
+            <th className="border-2 border-gray-700 px-4 py-2">Transmission Type</th>
+            <th className="border-2 border-gray-700 px-4 py-2">Fuel Type</th>
+            <th className="border-2 border-gray-700 px-4 py-2">Mileage</th>
+            <th className="border-2 border-gray-700 px-4 py-2">Rental Price</th>
+            <th className="border-2 border-gray-700 px-4 py-2">Market Price</th>
+            <th className="border-2 border-gray-700 px-4 py-2">Actions</th>
           </tr>
         </thead>
         <tbody>
           {cars.map((car) => (
             <tr className="text-center" key={car._id}>
-              <td className="border px-4 py-2">{car.name}</td>
-              <td className="border px-4 py-2">{car.make}</td>
-              <td className="border px-4 py-2">{car.model}</td>
-              <td className="border px-4 py-2">{car.year}</td>
-              <td className="border px-4 py-2">{car.transmissionType}</td>
-              <td className="border px-4 py-2">{car.fuelType}</td>
-              <td className="border px-4 py-2">{car.mileage}</td>
-              <td className="border px-4 py-2">
+              <td className="border-2 border-gray-700 px-4 py-2">{car.name}</td>
+              <td className="border-2 border-gray-700 px-4 py-2">{car.brand.make}</td>
+              <td className="border-2 border-gray-700 px-4 py-2">{car.model}</td>
+              <td className="border-2 border-gray-700 px-4 py-2">{car.year}</td>
+              <td className="border-2 border-gray-700 px-4 py-2">{car.transmissionType}</td>
+              <td className="border-2 border-gray-700 px-4 py-2">{car.fuelType}</td>
+              <td className="border-2 border-gray-700 px-4 py-2">{car.mileage}</td>
+              <td className="border-2 border-gray-700 px-4 py-2">{car.rental_price}</td>
+              <td className="border-2 border-gray-700 px-4 py-2">{car.price}</td>
+              <td className="border-2 border-gray-700 px-4 py-2">
                 <button
                   className="bg-yellow-500 text-white px-2 py-1 rounded mr-2"
                   onClick={() => selectCar(car)}
@@ -370,6 +385,7 @@ const AdminDashboard = () => {
               closeAddCarModal={closeAddCarModal}
               uploadPercent={uploadPercent}
               uploadError={uploadError}
+              brands={brands}
             />
           </div>
         </div>
@@ -388,6 +404,7 @@ const AdminDashboard = () => {
               handleUpdateModalClose={handleUpdateModalClose}
               uploadPercent={uploadPercent}
               uploadError={uploadError}
+              brands={brands}
             />
           </div>
         </div>

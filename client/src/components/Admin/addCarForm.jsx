@@ -28,18 +28,22 @@ const AddCarForm = (props) => {
                   htmlFor="make"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Make<span className="text-red-500">*</span>
+                  Brand<span className="text-red-500">*</span>
                 </label>
-                <input
-                  type="text"
-                  id="make"
-                  name="make"
-                  value={props.formData.make}
+                <select
+                  id="brand"
+                  name="brand"
+                  value={props.formData.brand}
                   onChange={(e) => props.handleInputChange(e.target.name, e.target.value)}
-                  required
                   className="mt-1 p-2 w-full border rounded"
-                  placeholder="Make"
-                />
+                >
+                  <option value="" disabled >
+                    Select Brand..
+                  </option>
+                  {props.brands.map((brand, index)=> (
+                    <option value={brand._id} key={index}>{brand.make}</option>
+                  ))}
+                </select>
               </div>
               <div className="mb-4">
                 <label
@@ -117,6 +121,7 @@ const AddCarForm = (props) => {
                   </option>
                   <option value="Petrol">Petrol</option>
                   <option value="Diseal">Diseal</option>
+                  <option value="Electric">Electric</option>
                 </select>
               </div>
               <div className="mb-4">
@@ -134,6 +139,40 @@ const AddCarForm = (props) => {
                   onChange={(e) => props.handleInputChange(e.target.name, e.target.value)}
                   className="mt-1 p-2 w-full border rounded"
                   placeholder="Mileage"
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="rental_price"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Rental Price
+                </label>
+                <input
+                  type="text"
+                  id="rental_price"
+                  name="rental_price"
+                  value={props.formData.rental_price}
+                  onChange={(e) => props.handleInputChange(e.target.name, e.target.value)}
+                  className="mt-1 p-2 w-full border rounded"
+                  placeholder="Rental Price"
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  htmlFor="price"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Price
+                </label>
+                <input
+                  type="text"
+                  id="price"
+                  name="price"
+                  value={props.formData.price}
+                  onChange={(e) => props.handleInputChange(e.target.name, e.target.value)}
+                  className="mt-1 p-2 w-full border rounded"
+                  placeholder="Price"
                 />
               </div>
               <div className="mb-4">
