@@ -42,7 +42,7 @@ export default function Header() {
           </Link>
         </ul>
       </div>
-      <div className="border-t-2">
+      <div className="border-t-2 border-b-2">
         <SecondaryHeader />
       </div>
     </div>

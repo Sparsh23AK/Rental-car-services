@@ -42,6 +42,7 @@ const AdminDashboard = () => {
     image1: null,
     image2: null,
     image3: null,
+    carType: ""
   });
   const [prevImageUrls, setPrevImageUrls] = useState({
     image1: null,
@@ -63,6 +64,7 @@ const AdminDashboard = () => {
     image1: null,
     image2: null,
     image3: null,
+    carType: ""
   });
 
   const getInitialFormData = () => ({
@@ -79,6 +81,7 @@ const AdminDashboard = () => {
     image1: null,
     image2: null,
     image3: null,
+    carType: ""
   });
   //Fetch cars data from backend
   useEffect(() => {
@@ -339,6 +342,7 @@ const AdminDashboard = () => {
             <th className="border-2 border-gray-700 px-4 py-2">Mileage</th>
             <th className="border-2 border-gray-700 px-4 py-2">Rental Price</th>
             <th className="border-2 border-gray-700 px-4 py-2">Market Price</th>
+            <th className="border-2 border-gray-700 px-4 py-2">Car Type</th>
             <th className="border-2 border-gray-700 px-4 py-2">Actions</th>
           </tr>
         </thead>
@@ -354,6 +358,7 @@ const AdminDashboard = () => {
               <td className="border-2 border-gray-700 px-4 py-2">{car.mileage}</td>
               <td className="border-2 border-gray-700 px-4 py-2">{car.rental_price}</td>
               <td className="border-2 border-gray-700 px-4 py-2">{car.price}</td>
+              <td className="border-2 border-gray-700 px-4 py-2">{car.carType}</td>
               <td className="border-2 border-gray-700 px-4 py-2">
                 <button
                   className="bg-yellow-500 text-white px-2 py-1 rounded mr-2"

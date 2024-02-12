@@ -174,6 +174,30 @@ const UpdateCarForm = (props) => {
               </div>
               <div className="mb-4">
                 <label
+                  htmlFor="carType"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Car Type
+                </label>
+                <select
+                  id="carType"
+                  name="carType"
+                  value={props.selectedCar.carType}
+                  onChange={(e) => props.handleUpdateChange(e.target.name, e.target.value)}
+                  className="mt-1 p-2 w-full border rounded"
+                >
+                  <option value="" disabled >
+                    Select Car type..
+                  </option>
+                  <option value="SUV">SUV</option>
+                  <option value="Sedan">Sedan</option>
+                  <option value="HatchBack">HatchBack</option>
+                  <option value="MUV">MUV</option>
+                  <option value="Luxury">Luxury</option>
+                </select>
+              </div>
+              <div className="mb-4">
+                <label
                   htmlFor="status"
                   className="block text-sm font-medium text-gray-700"
                 >
@@ -192,6 +216,7 @@ const UpdateCarForm = (props) => {
                   <option value="available">Available</option>
                   <option value="rented">Rented</option>
                   <option value="sold">Sold</option>
+                  <option value="upcoming">Up Coming</option>
                 </select>
               </div>
 

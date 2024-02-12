@@ -9,7 +9,7 @@ const carSchema = new mongoose.Schema({
   mileage: String,
   status: {
     type: String,
-    enum: ["available", "rented", "sold"],
+    enum: ["available", "rented", "sold", "upcoming"],
     default: "available",
   },
   rental_price: { type: Number, required: true },
@@ -22,6 +22,9 @@ const carSchema = new mongoose.Schema({
     required: true,
     enum: ["Petrol", "Electric", "Diseal"],
   },
+  carType: {type: String,
+    enum: ["SUV", "Sedan", "HatchBack", "MUV", "Luxury"],
+    required: true}
 });
 
 const Car = mongoose.model("Car", carSchema);

@@ -18,6 +18,7 @@ export const saveCar = async (req, res, next) => {
       image1,
       image2,
       image3,
+      carType
     } = req.body;
 
     // Create a new car instance
@@ -35,6 +36,7 @@ export const saveCar = async (req, res, next) => {
       image1,
       image2,
       image3,
+      carType
     });
 
     // Save the new car to the database

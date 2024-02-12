@@ -46,7 +46,7 @@ export default function SignUp() {
   return (
     <div>
       {!error ? (
-        <div className="p-3 max-w-lg mx-auto">
+        <div className="p-3 max-w-lg mx-auto h-screen md:h-[75vh]">
           <h1 className="text-3xl text-center font-semibold my-7">Sign Up</h1>
           <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
             <input
@@ -86,7 +86,7 @@ export default function SignUp() {
           </div>
         </div>
       ) : (
-        <div className="p-3 max-w-lg mx-auto">
+        <div className="p-3 max-w-lg mx-auto h-screen md:h-[75vh]">
           {error ? (
             <ErrorPopUp
               message={"Username or Email already exists. Please retry again."}
