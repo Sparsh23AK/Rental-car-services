@@ -24,11 +24,7 @@ export default function Header() {
           <Link to="/about">
             <li>About</li>
           </Link>
-          <Link to="/admin">
-            {currentUser && currentUser.isAdmin && (
-              <li className="text-red-700">Admin</li>
-            )}
-          </Link>
+
           <Link to="/profile">
             {currentUser ? (
               <img
@@ -38,6 +34,11 @@ export default function Header() {
               />
             ) : (
               <li>Sign In</li>
+            )}
+          </Link>
+          <Link to="/admin">
+            {currentUser && currentUser.isAdmin && (
+              <li className="text-red-700">Admin</li>
             )}
           </Link>
         </ul>

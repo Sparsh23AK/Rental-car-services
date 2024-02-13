@@ -44,16 +44,16 @@ const Footer = () => {
           <div className="flex flex-col items-center mb-6 mt-4 space-x-4 text-md gap-6">
             <div className="flex items-center space-x-4">
               <Link to="/about" className="text-gray-600 hover:text-gray-900">
-                About Us
+                About
               </Link>
               <Link to="/" className="text-gray-600 hover:text-gray-900">
                 Contact Us
               </Link>
             </div>
-            <div className="flex items-center space-x-4">
-              <FaXTwitter className="text-gray-600 hover:text-gray-900" />
-              <FaLinkedin className="text-gray-600 hover:text-gray-900" />
-              <FaGithub className="text-gray-600 hover:text-gray-900" />
+            <div className="flex items-center space-x-4 ">
+              <FaXTwitter className="text-black hover:text-gray-500 hover:cursor-pointer" />
+              <FaLinkedin className="text-blue-600 hover:text-gray-500 hover:cursor-pointer" />
+              <FaGithub className="text-black hover:text-gray-500 hover:cursor-pointer" />
             </div>
           </div>
           <div className="text-gray-600 text-center">

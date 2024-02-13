@@ -7,10 +7,12 @@ import {
   fetchBrandSuccess,
 } from "../../redux/car/brandSlice";
 import Accordion from "./Accordion";
-import dashboard from "../../assets/dashboard.jpg"
+import dashboard from "../../assets/dashboard.jpg";
+import Brands from "./brands";
 
 export default function Home() {
   const dispatch = useDispatch();
+  const [brands, setBrands] = useState([]);
   const accordionData = [
     {
       title: "Card 1",
@@ -48,16 +50,22 @@ export default function Home() {
         return;
       }
       dispatch(fetchBrandSuccess(data));
+      setBrands(data);
     } catch (error) {
       dispatch(fetchBrandFailure(error));
     }
+  };
+
+  const modifyBrandData = async (data) => {
+
+
   };
 
   return (
     <div className="bg-[#f6f6f6] pb-10">
       <div className="relative w-full h-full">
         <img
-        //src="https://www.avis.co.in/images/carrental4.webp"
+          //src="https://www.avis.co.in/images/carrental4.webp"
           src={dashboard}
           className="w-full h-screen md:h-[75vh] object-cover"
           alt="Car Interior"
@@ -107,10 +115,10 @@ export default function Home() {
 
       {/* Top Brands */}
       <div className="container max-w-7xl mx-auto mt-8 flex justify-center">
-        <Accordion
+        <Brands
           title="Top Brands"
           message="Explore Cars by Brand."
-          cards={accordionData}
+          brands={brands}
         />
       </div>
 
