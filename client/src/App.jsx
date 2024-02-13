@@ -27,7 +27,7 @@ export default function App() {
         </Route>
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/blog" element={<Blogs />} />
-        <Route path="/blogs/:id" component={BlogPage} />
+        <Route path="/blogs/:id" element={<BlogPage />} />
       </Routes>
       <Footer />
     </BrowserRouter>

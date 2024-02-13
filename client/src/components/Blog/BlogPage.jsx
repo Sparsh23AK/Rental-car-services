@@ -7,7 +7,6 @@ import { blogsData } from "./blogData";
 const BlogPage = () => {
   const { id } = useParams(); // Get the blog ID from URL parameters
   const blog = blogsData.find(blog => blog.id === parseInt(id)); // Find the blog with the matching ID
-  console.log(blog);
 
   if (!blog) {
     return <div>Blog not found</div>; // Handle case where blog is not found
@@ -16,13 +15,15 @@ const BlogPage = () => {
   const { title, content, imageUrl } = blog;
 
   return (
-    <div className="mb-8">
-      <h2 className="text-2xl font-semibold mb-2">{title}</h2>
-      <img src={imageUrl} alt={title} className="w-full mb-4" />
-      <div className="text-lg leading-relaxed">
-        {content.split('\n').map((paragraph, index) => (
-          <p key={index}>{paragraph}</p>
-        ))}
+    <div className="container mx-auto py-8">
+      <div className="max-w-5xl mx-auto bg-white shadow-md rounded-md p-6">
+        <h1 className="text-3xl font-semibold text-black mb-4">{title}</h1>
+        <img src={imageUrl} alt={title} className="w-full h-auto mb-6 rounded-md" style={{ maxWidth: '100%', maxHeight: '400px' }} />
+        <div className="text-lg leading-relaxed">
+          {content.split('\n').map((paragraph, index) => (
+            <p key={index} className="mb-4 font-medium">{paragraph}</p>
+          ))}
+        </div>
       </div>
     </div>
   );
