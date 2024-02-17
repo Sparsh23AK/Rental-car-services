@@ -42,7 +42,7 @@ const AdminDashboard = () => {
     image1: null,
     image2: null,
     image3: null,
-    carType: ""
+    carType: "",
   });
   const [prevImageUrls, setPrevImageUrls] = useState({
     image1: null,
@@ -64,7 +64,7 @@ const AdminDashboard = () => {
     image1: null,
     image2: null,
     image3: null,
-    carType: ""
+    carType: "",
   });
 
   const getInitialFormData = () => ({
@@ -81,7 +81,7 @@ const AdminDashboard = () => {
     image1: null,
     image2: null,
     image3: null,
-    carType: ""
+    carType: "",
   });
   //Fetch cars data from backend
   useEffect(() => {
@@ -173,11 +173,10 @@ const AdminDashboard = () => {
 
   const handleInputChange = (name, value) => {
     console.log(name, value);
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
   const handleDelete = async (car) => {
@@ -316,7 +315,7 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="container mx-auto mt-8">
+    <div className="container mx-auto mt-8 h-screen md:h-[75vh]">
       <div className="flex justify-between mb-4 mx-auto max-w-7xl items-center p-3">
         <h1 className="text-2xl font-bold">Admin Dashboard</h1>
         <button
@@ -337,7 +336,9 @@ const AdminDashboard = () => {
             <th className="border-2 border-gray-700 px-4 py-2">Brand</th>
             <th className="border-2 border-gray-700 px-4 py-2">Model</th>
             <th className="border-2 border-gray-700 px-4 py-2">Year</th>
-            <th className="border-2 border-gray-700 px-4 py-2">Transmission Type</th>
+            <th className="border-2 border-gray-700 px-4 py-2">
+              Transmission Type
+            </th>
             <th className="border-2 border-gray-700 px-4 py-2">Fuel Type</th>
             <th className="border-2 border-gray-700 px-4 py-2">Mileage</th>
             <th className="border-2 border-gray-700 px-4 py-2">Rental Price</th>
@@ -350,15 +351,31 @@ const AdminDashboard = () => {
           {cars.map((car) => (
             <tr className="text-center" key={car._id}>
               <td className="border-2 border-gray-700 px-4 py-2">{car.name}</td>
-              <td className="border-2 border-gray-700 px-4 py-2">{car.brand.make}</td>
-              <td className="border-2 border-gray-700 px-4 py-2">{car.model}</td>
+              <td className="border-2 border-gray-700 px-4 py-2">
+                {car.brand.make}
+              </td>
+              <td className="border-2 border-gray-700 px-4 py-2">
+                {car.model}
+              </td>
               <td className="border-2 border-gray-700 px-4 py-2">{car.year}</td>
-              <td className="border-2 border-gray-700 px-4 py-2">{car.transmissionType}</td>
-              <td className="border-2 border-gray-700 px-4 py-2">{car.fuelType}</td>
-              <td className="border-2 border-gray-700 px-4 py-2">{car.mileage}</td>
-              <td className="border-2 border-gray-700 px-4 py-2">{car.rental_price}</td>
-              <td className="border-2 border-gray-700 px-4 py-2">{car.price}</td>
-              <td className="border-2 border-gray-700 px-4 py-2">{car.carType}</td>
+              <td className="border-2 border-gray-700 px-4 py-2">
+                {car.transmissionType}
+              </td>
+              <td className="border-2 border-gray-700 px-4 py-2">
+                {car.fuelType}
+              </td>
+              <td className="border-2 border-gray-700 px-4 py-2">
+                {car.mileage}
+              </td>
+              <td className="border-2 border-gray-700 px-4 py-2">
+                {car.rental_price}
+              </td>
+              <td className="border-2 border-gray-700 px-4 py-2">
+                {car.price}
+              </td>
+              <td className="border-2 border-gray-700 px-4 py-2">
+                {car.carType}
+              </td>
               <td className="border-2 border-gray-700 px-4 py-2">
                 <button
                   className="bg-yellow-500 text-white px-2 py-1 rounded mr-2"
@@ -380,7 +397,26 @@ const AdminDashboard = () => {
 
       {isAddCarModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-8 max-w-md rounded-lg shadow-2xl w-full h-3/4 overflow-auto">
+          <div className="bg-white p-8 max-w-2xl rounded-lg shadow-2xl w-full h-5/6 overflow-auto">
+            <button
+              onClick={closeAddCarModal}
+              className="absolute top-2 right-2 text-gray-600 hover:text-gray-800 focus:outline-none"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
             <h2 className="text-2xl font-bold mb-4">Add Car Info</h2>
             <AddCarForm
               formData={formData}
@@ -399,7 +435,26 @@ const AdminDashboard = () => {
       {/* Update Car Modal */}
       {isUpdateModalOpen && selectedCar && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-8 max-w-md rounded-lg shadow-2xl w-full h-3/4 overflow-auto">
+          <div className="bg-white p-8 max-w-2xl rounded-lg shadow-2xl w-full h-5/6 overflow-auto">
+            <button
+              onClick={handleUpdateModalClose}
+              className="absolute top-2 right-2 text-gray-600 hover:text-gray-800 focus:outline-none"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
             <h2 className="text-2xl font-bold mb-4">Update Car</h2>
             <UpdateCarForm
               selectedCar={selectedCar}

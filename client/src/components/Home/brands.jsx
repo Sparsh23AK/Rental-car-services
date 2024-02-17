@@ -30,7 +30,7 @@ const Brands = ({ title, brands, message }) => {
       {brands.length > 5 && (
         <button
           onClick={toggleShowAllBrands}
-          className="mt-4 text-blue-500 focus:outline-none"
+          className="mt-4 font-semibold text-orange-600 focus:outline-none hover:text-orange-800"
           style={{ float: "right" }}
         >
           {showAllBrands ? "Collapse" : "View all brands"}

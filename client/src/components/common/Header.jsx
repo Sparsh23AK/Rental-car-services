@@ -9,12 +9,13 @@ export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
 
   return (
-    <div className="bg-white p-1">
-      <div className="flex justify-between mx-auto max-w-6xl items-center p-1 ">
+    <div className="bg-white pt-2 z-1">
+      <div className="flex justify-between mx-auto max-w-6xl items-center p-1">
         <Link to="/">
           <img
             src={myImage}
             className="object-cover h-12 w-48 rounded-lg border border-black"
+            alt="Carental Logo"
           />
         </Link>
         <ul className="flex gap-4 text-md font-medium text-[#24272c]">
@@ -24,7 +25,6 @@ export default function Header() {
           <Link to="/about">
             <li>About</li>
           </Link>
-
           <Link to="/profile">
             {currentUser ? (
               <img
@@ -49,3 +49,4 @@ export default function Header() {
     </div>
   );
 }
+

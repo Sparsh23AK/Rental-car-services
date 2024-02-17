@@ -10,7 +10,7 @@ export default function SecondaryHeader() {
     <div className="bg-white p-1">
       <div className="flex justify-between mx-auto max-w-6xl items-center p-1">
         <ul className="flex gap-4 text-lg font-medium text-[#69696a]">
-          <Link to="/">
+          <Link to="/" className="linkStyle">
             <li>
               <select
                 id="newCars"
@@ -27,10 +27,10 @@ export default function SecondaryHeader() {
               </select>
             </li>
           </Link>
-          <Link to="/">
+          <Link to="/" className="linkStyle">
             <li className="px-4">Rentals</li>
           </Link>
-          <Link to="/blog">
+          <Link to="/blog" className="linkStyle">
             <li className="px-4">Blogs</li>
           </Link>
         </ul>
