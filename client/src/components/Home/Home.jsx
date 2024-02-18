@@ -24,29 +24,9 @@ export default function Home() {
   const [loading, setLoading] = useState(true); // Add a loading state
   const { brands } = useSelector((state) => state.brand);
   const { cars } = useSelector((state) => state.car);
-
-  const accordionData = [
-    {
-      title: "Card 1",
-      content: "Content for Card 1",
-      imageSrc: "https://via.placeholder.com/150",
-    },
-    {
-      title: "Card 2",
-      content: "Content for Card 2",
-      imageSrc: "https://via.placeholder.com/150",
-    },
-    {
-      title: "Card 3",
-      content: "Content for Card 3",
-      imageSrc: "https://via.placeholder.com/150",
-    },
-    {
-      title: "Card 4",
-      content: "Content for Card 3",
-      imageSrc: "https://via.placeholder.com/150",
-    },
-  ];
+  const [trendingCars, setTrendingCars] = useState([]);
+  const [upComingCars, setUpcomingCars] = useState([]);
+  const [electricCars, setElectricCars] = useState([]);
 
   useEffect(() => {
     fetchData(); // Initial data fetch when the component mounts
@@ -59,6 +39,9 @@ export default function Home() {
       const response = await fetch("/api/cars/getCars");
       const data = await response.json();
       dispatch(fetchCarsSuccess(data));
+      setElectricCars(() => cars.filter((car) => car.fuelType === "Electric"));
+      setUpcomingCars(() => cars.filter((car) => car.isUpcoming === true));
+      setTrendingCars(() => cars.filter((car) => car.isTrending === true));
       setLoading(false); // Set loading to false after data is fetched
     } catch (error) {
       dispatch(fetchCarsFailure(error));
@@ -122,7 +105,6 @@ export default function Home() {
         <>
           <div className="relative w-full h-full">
             <img
-              //src="https://www.avis.co.in/images/carrental4.webp"
               src={dashboard}
               className="w-full h-screen md:h-[75vh] object-cover"
               alt="Car Interior"
@@ -132,8 +114,8 @@ export default function Home() {
                 Buying your dream car?
               </h1>
               <p className="text-white text-3xl font-semibold">Check Now!!</p>
-              <div className="grid grid-cols-2 p-2">
-                <form onSubmit={handleSubmit} className="p-2">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                <form onSubmit={handleSubmit}>
                   <div className="grid grid-cols-2">
                     <select
                       id="budget"
@@ -148,7 +130,6 @@ export default function Home() {
                       <option value="1000000 to 1500000">10 - 15 Lakh</option>
                       <option value="1500000 to 2000000">15 - 20 Lakh</option>
                       <option value="2000000 to 5000000">20 - 50 Lakh</option>
-                      {/* Add your budget options here */}
                     </select>
                     <select
                       id="vehical_type"
@@ -163,12 +144,11 @@ export default function Home() {
                       <option value="HatchBack">HatchBack</option>
                       <option value="MUV">MUV</option>
                       <option value="Luxury">Luxury</option>
-                      {/* Add your vehicle type options here */}
                     </select>
                     <div className="flex items-end justify-end col-span-2">
                       <button
                         type="submit"
-                        disabled={!priceRange || !carType} // Disable the button if either priceRange or carType is empty
+                        disabled={!priceRange || !carType}
                         className={`mt-1 px-4 py-2 rounded-b-lg font-medium border ${
                           !priceRange || !carType
                             ? "bg-gray-300 text-gray-500 border-gray-300 cursor-not-allowed"
@@ -184,16 +164,18 @@ export default function Home() {
             </div>
           </div>
           {/* Trending cars */}
-          <div className="container max-w-7xl mx-auto mt-8 flex justify-center">
+          <div className="container max-w-7xl mx-auto mt-8">
             <Accordion
               title="Trending Cars"
               message="Find out the trending Cars."
-              cards={accordionData}
+              cards={trendingCars}
+              btn=""
+              viewOnly={true}
             />
           </div>
 
           {/* Top Brands */}
-          <div className="container max-w-7xl mx-auto mt-8 flex justify-center">
+          <div className="container max-w-7xl mx-auto mt-8">
             <Brands
               title="Top Brands"
               message="Explore Cars by Brand."
@@ -202,20 +184,24 @@ export default function Home() {
           </div>
 
           {/* Explore Electric cars */}
-          <div className="container max-w-7xl mx-auto mt-8 flex justify-center">
+          <div className="container max-w-7xl mx-auto mt-8">
             <Accordion
               title="Electric Cars"
               message="Check out latest EVs."
-              cards={cars}
+              cards={electricCars}
+              btn="View more Electric Cars"
+              viewOnly={false}
             />
           </div>
 
           {/* Explore up Coming cars */}
-          <div className="container max-w-7xl mx-auto mt-8 flex justify-center">
+          <div className="container max-w-7xl mx-auto mt-8">
             <Accordion
               title="Up Coming Cars"
               message="Check out up coming cars."
-              cards={accordionData}
+              cards={upComingCars}
+              viewOnly={true}
+              btn=""
             />
           </div>
         </>

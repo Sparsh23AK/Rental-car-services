@@ -47,7 +47,7 @@ export const google = async (req, res, next) => {
     if (user) {
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
       const { password: hashedPassword, ...rest } = user._doc;
-      const expiryDate = 60 * 60 * 24 * 5 * 1000;
+      const expiryDate = new Date(Date.now() + 60 * 60 * 24 * 5 * 1000);
       res
         .cookie("access_token", token, { httpOnly: true, expires: expiryDate })
         .status(200)
@@ -72,10 +72,10 @@ export const google = async (req, res, next) => {
       await newUser.save();
       const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
       const { password: hashedPassword2, ...rest } = newUser._doc;
-      const expiryDate = new Date(Date.now() + 3600000); // 1hr
+      const expiryDate = new Date(Date.now() + 60 * 60 * 24 * 5 * 1000);
 
       res
-        .cookie("access_token", token, { httpOnly: true })
+        .cookie("access_token", token, { httpOnly: true, expires: expiryDate })
         .status(200)
         .json(rest);
     }
@@ -85,6 +85,6 @@ export const google = async (req, res, next) => {
 };
 
 //Sign Out Logic
-export const signout =  (req, res) => {
-  res.clearCookie('access_token').status(200).json("Sign Out successful!")
+export const signout = (req, res) => {
+  res.clearCookie("access_token").status(200).json("Sign Out successful!");
 };

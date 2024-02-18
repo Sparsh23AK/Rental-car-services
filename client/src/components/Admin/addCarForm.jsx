@@ -249,6 +249,48 @@ const AddCarForm = (props) => {
 
       <div className="mb-4">
         <label
+          htmlFor="isTrending"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Is Trending ?
+        </label>
+        <select
+          id="isTrending"
+          name="isTrending"
+          value={props.formData.isTrending}
+          onChange={(e) =>
+            props.handleInputChange(e.target.name, e.target.value)
+          }
+          className="mt-1 p-2 w-full border rounded"
+        >
+          <option value="false">False</option>
+          <option value="true">True</option>
+        </select>
+      </div>
+
+      <div className="mb-4">
+        <label
+          htmlFor="isUpcoming"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Is Upcoming ?
+        </label>
+        <select
+          id="isUpcoming"
+          name="isUpcoming"
+          value={props.formData.isUpcoming}
+          onChange={(e) =>
+            props.handleInputChange(e.target.name, e.target.value)
+          }
+          className="mt-1 p-2 w-full border rounded"
+        >
+          <option value="false">False</option>
+          <option value="true">True</option>
+        </select>
+      </div>
+
+      <div className="mb-4">
+        <label
           htmlFor="image1"
           className="block text-sm font-medium text-gray-700"
         >

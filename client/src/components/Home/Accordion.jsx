@@ -4,7 +4,7 @@
 import React from 'react';
 import Card from './Card';
 
-const Accordion = ({ title, cards, message }) => {
+const Accordion = ({ title, cards, message, btn, viewOnly }) => {
     return (
       <div className="border border-gray-300 p-4 mb-4 w-full bg-white">
         <h2 className="text-xl font-bold mb-4 text-black">{title}</h2>
@@ -15,8 +15,14 @@ const Accordion = ({ title, cards, message }) => {
             <Card key={index} car= {card} />
           ))}
         </div>
-      </div>
+        {!viewOnly &&
+        <div className="mt-4 border-t border-gray-300 pt-4">
+          <button className="px-6 py-2 bg-white text-black border border-black transition-all hover:bg-orange-500 hover:text-white hover:border-white justify-self-start">
+            {btn}
+          </button>
+        </div> }
+      </div> 
     );
-  };
+};
 
 export default Accordion;

@@ -43,6 +43,8 @@ const AdminDashboard = () => {
     image2: null,
     image3: null,
     carType: "",
+    isTrending: false,
+    isUpcoming: false
   });
   const [prevImageUrls, setPrevImageUrls] = useState({
     image1: null,
@@ -65,6 +67,8 @@ const AdminDashboard = () => {
     image2: null,
     image3: null,
     carType: "",
+    isTrending: false,
+    isUpcoming: false
   });
 
   const getInitialFormData = () => ({
@@ -82,6 +86,8 @@ const AdminDashboard = () => {
     image2: null,
     image3: null,
     carType: "",
+    isTrending: false,
+    isUpcoming: false
   });
   //Fetch cars data from backend
   useEffect(() => {

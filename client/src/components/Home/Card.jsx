@@ -16,26 +16,37 @@ const Card = ({ car }) => {
     return () => clearInterval(interval);
   }, [images.length]);
 
+  const formatPrice = (price) => {
+    if (price < 100000) {
+      return `₹ ${price}`;
+    } else if (price < 10000000) {
+      return `₹ ${(price / 100000).toFixed(1)} Lakh`;
+    } else {
+      return `₹ ${(price / 10000000).toFixed(1)} Crore`;
+    }
+  };
+
   return (
-    <div className="border border-gray-300 rounded-sm p-2 mb-2 justify-between items-center">
+    <div className="border border-gray-300 rounded-sm justify-between items-center">
       <div className="relative h-48">
         <img
           src={images[currentImageIndex]}
           alt={name}
-          className="h-full w-full object-cover rounded-md"
+          className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="absolute top-0 left-0 p-2 bg-black bg-opacity-50 text-white font-bold">
+        <div className="absolute bottom-0 left-0 right-0 p-2 bg-black bg-opacity-50 text-white font-bold">
           {name}
         </div>
       </div>
-      <div className="flex justify-between items-center mt-2">
-        <p className="text-lg font-bold">&#x20B9; {price}</p>
-        <button className="px-4 py-2 bg-white text-black border border-black rounded-lg transition-all hover:bg-orange-500 hover:text-white hover:border-white">
+      <div className="pt-4 bottom-0 left-0 right-0">
+        <p className="text-lg font-bold p-2"> {formatPrice(price)}</p>
+        <button className="mt-2 w-full px-4 py-2 bg-white text-black border border-black  transition-all hover:bg-orange-500 hover:text-white hover:border-white">
           Show Details
         </button>
       </div>
     </div>
   );
 };
+
 
 export default Card;
