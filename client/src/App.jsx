@@ -11,7 +11,7 @@ import AdminDashboard from "./components/Admin/admin";
 import Footer from "./components/common/Footer.jsx";
 import Blogs from "./components/Blog/Blogs.jsx";
 import BlogPage from "./components/Blog/BlogPage.jsx";
-
+import ViewCars from "./components/Cars/ViewCars.jsx";
 
 export default function App() {
   return (
@@ -28,6 +28,14 @@ export default function App() {
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/blog" element={<Blogs />} />
         <Route path="/blogs/:id" element={<BlogPage />} />
+        <Route
+          path="/cars/viewcars/:priceRange/:carType"
+          element={<ViewCars />}
+        />
+        <Route
+          path="/cars/viewcars/:fuelType"
+          element={<ViewCars />}
+        />
       </Routes>
       <Footer />
     </BrowserRouter>

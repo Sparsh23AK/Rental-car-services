@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   fetchBrandFailure,
   fetchBrandStart,
@@ -27,6 +28,8 @@ export default function Home() {
   const [trendingCars, setTrendingCars] = useState([]);
   const [upComingCars, setUpcomingCars] = useState([]);
   const [electricCars, setElectricCars] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchData(); // Initial data fetch when the component mounts
@@ -64,10 +67,21 @@ export default function Home() {
     }
   };
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   fetchCarsByPriceRange(priceRange, carType);
+  // };
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetchCarsByPriceRange(priceRange, carType);
+    if (priceRange && carType) {
+      const encodedPriceRange = encodeURIComponent(priceRange);
+      const encodedCarType = encodeURIComponent(carType);
+      navigate(`/cars/viewcars/${encodedPriceRange}/${encodedCarType}`);
+    }
   };
+
 
   const fetchCarsByPriceRange = async (priceRange, carType) => {
     try {
