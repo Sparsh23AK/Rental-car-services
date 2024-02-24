@@ -350,6 +350,136 @@ const UpdateCarForm = (props) => {
           )}
         </p>
       </div>
+      <div className="mb-4">
+        <input
+          type="text"
+          id="description"
+          name="description"
+          value={props.selectedCar.description}
+          onChange={(e) =>
+            props.handleUpdateChange(e.target.name, e.target.value)
+          }
+          className="mt-1 p-2 w-full border rounded"
+          placeholder="Enter description"
+        />
+      </div>
+      <div className="mb-4">
+        <input
+          type="text"
+          id="engine"
+          name="engine"
+          value={props.selectedCar.engine}
+          onChange={(e) =>
+            props.handleUpdateChange(e.target.name, e.target.value)
+          }
+          className="mt-1 p-2 w-full border rounded"
+          placeholder="Enter Engine"
+        />
+      </div>
+      <div className="mb-4">
+        <input
+          type="text"
+          id="power"
+          name="power"
+          value={props.selectedCar.power}
+          onChange={(e) =>
+            props.handleUpdateChange(e.target.name, e.target.value)
+          }
+          className="mt-1 p-2 w-full border rounded"
+          placeholder="Enter Power"
+        />
+      </div>
+      <div className="mb-4">
+        <input
+          type="text"
+          id="driveType"
+          name="driveType"
+          value={props.selectedCar.driveType}
+          onChange={(e) =>
+            props.handleUpdateChange(e.target.name, e.target.value)
+          }
+          className="mt-1 p-2 w-full border rounded"
+          placeholder="Enter Drive Type"
+        />
+      </div>
+      <div className="mb-4">
+        <input
+          type="text"
+          id="torque"
+          name="torque"
+          value={props.selectedCar.torque}
+          onChange={(e) =>
+            props.handleUpdateChange(e.target.name, e.target.value)
+          }
+          className="mt-1 p-2 w-full border rounded"
+          placeholder="Enter Torque"
+        />
+      </div>
+      <div className="mb-4">
+        <input
+          type="text"
+          id="batteryCapacity"
+          name="batteryCapacity"
+          value={props.selectedCar.batteryCapacity}
+          onChange={(e) =>
+            props.handleUpdateChange(e.target.name, e.target.value)
+          }
+          className="mt-1 p-2 w-full border rounded"
+          placeholder="Enter Battery Capacity"
+        />
+      </div>
+      <div className="mb-4">
+        <input
+          type="text"
+          id="topSpeed"
+          name="topSpeed"
+          value={props.selectedCar.topSpeed}
+          onChange={(e) =>
+            props.handleUpdateChange(e.target.name, e.target.value)
+          }
+          className="mt-1 p-2 w-full border rounded"
+          placeholder="Enter Top Speed"
+        />
+      </div>
+      <div className="mb-4">
+        <input
+          type="text"
+          id="chargingTime"
+          name="chargingTime"
+          value={props.selectedCar.chargingTime}
+          onChange={(e) =>
+            props.handleUpdateChange(e.target.name, e.target.value)
+          }
+          className="mt-1 p-2 w-full border rounded"
+          placeholder="Enter Charging Time"
+        />
+      </div>
+      <div className="mb-4">
+        <input
+          type="text"
+          id="range"
+          name="range"
+          value={props.selectedCar.range}
+          onChange={(e) =>
+            props.handleUpdateChange(e.target.name, e.target.value)
+          }
+          className="mt-1 p-2 w-full border rounded"
+          placeholder="Enter Range"
+        />
+      </div>
+      <div className="mb-4">
+        <input
+          type= "text"
+          id="rating"
+          name="rating"
+          value={props.selectedCar.rating}
+          onChange={(e) =>
+            props.handleUpdateChange(e.target.name, e.target.value)
+          }
+          className="mt-1 p-2 w-full border rounded"
+          placeholder="Enter Rating Out of 5"
+        />
+      </div>
 
       <div className="flex justify-end">
         <button

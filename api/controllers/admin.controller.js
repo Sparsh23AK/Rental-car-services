@@ -20,7 +20,17 @@ export const saveCar = async (req, res, next) => {
       image3,
       carType,
       isTrending,
-      isUpcoming
+      isUpcoming,
+      description,
+      engine,
+      power,
+      driveType,
+      torque,
+      batteryCapacity,
+      topSpeed,
+      chargingTime,
+      range,
+      rating
     } = req.body;
 
     // Create a new car instance
@@ -40,7 +50,17 @@ export const saveCar = async (req, res, next) => {
       image3,
       carType,
       isTrending,
-      isUpcoming
+      isUpcoming,
+      description,
+      engine,
+      power,
+      driveType,
+      torque,
+      batteryCapacity,
+      topSpeed,
+      chargingTime,
+      range,
+      rating
     });
 
     // Save the new car to the database

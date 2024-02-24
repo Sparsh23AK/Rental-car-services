@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 const BlogCard = ({ blog }) => {
   const { id, title, content, imageUrl } = blog;
 
-  console.log("from cards: ", blog);
 
   return (
     <div className="bg-white p-4 rounded-lg shadow-xl flex">

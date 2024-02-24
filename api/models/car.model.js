@@ -26,8 +26,16 @@ const carSchema = new mongoose.Schema({
     enum: ["SUV", "Sedan", "HatchBack", "MUV", "Luxury"],
     required: true},
   isTrending: {type: Boolean, default: false},
-  isUpcoming: {type: Boolean, default: false}
-  
+  isUpcoming: {type: Boolean, default: false},
+  engine: {type: String},
+  power: {type: String},
+  driveType: {type: String},
+  batteryCapacity: {type: String},
+  topSpeed: {type: String},
+  chargingTime: {type: String},
+  range: {type: String},
+  torque: {type: String},
+  rating: {type: String}
 });
 
 const Car = mongoose.model("Car", carSchema);

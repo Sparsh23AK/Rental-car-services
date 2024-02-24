@@ -302,7 +302,7 @@ const AddCarForm = (props) => {
           name="image1"
           accept="image/*"
           onChange={(e) => props.handleFileUpload(e)}
-          required
+          // required
         />
       </div>
 
@@ -319,7 +319,7 @@ const AddCarForm = (props) => {
           name="image2"
           accept="image/*"
           onChange={(e) => props.handleFileUpload(e)}
-          required
+          // required
         />
       </div>
 
@@ -336,7 +336,7 @@ const AddCarForm = (props) => {
           name="image3"
           accept="image/*"
           onChange={(e) => props.handleFileUpload(e)}
-          required
+          // required
         />
         <p className="text-sm self-center">
           {props.uploadError ? (
@@ -352,6 +352,180 @@ const AddCarForm = (props) => {
           )}
         </p>
       </div>
+      <div className="mb-4">
+        <input
+          type="text"
+          id="image1"
+          name="image1"
+          value={props.formData.image1}
+          onChange={(e) =>
+            props.handleInputChange(e.target.name, e.target.value)
+          }
+          required
+          className="mt-1 p-2 w-full border rounded"
+          placeholder="Enter URL 1"
+        />
+      </div>
+      <div className="mb-4">
+        <input
+          type="text"
+          id="image2"
+          name="image2"
+          value={props.formData.image2}
+          onChange={(e) =>
+            props.handleInputChange(e.target.name, e.target.value)
+          }
+          required
+          className="mt-1 p-2 w-full border rounded"
+          placeholder="Enter URL 2"
+        />
+      </div>
+      <div className="mb-4">
+        <input
+          type="text"
+          id="image3"
+          name="image3"
+          value={props.formData.image3}
+          onChange={(e) =>
+            props.handleInputChange(e.target.name, e.target.value)
+          }
+          required
+          className="mt-1 p-2 w-full border rounded"
+          placeholder="Enter URL 3"
+        />
+      </div>
+      <div className="mb-4">
+        <input
+          type="text"
+          id="description"
+          name="description"
+          value={props.formData.description}
+          onChange={(e) =>
+            props.handleInputChange(e.target.name, e.target.value)
+          }
+          required
+          className="mt-1 p-2 w-full border rounded"
+          placeholder="Enter description"
+        />
+      </div>
+      <div className="mb-4">
+        <input
+          type="text"
+          id="engine"
+          name="engine"
+          value={props.formData.engine}
+          onChange={(e) =>
+            props.handleInputChange(e.target.name, e.target.value)
+          }
+          className="mt-1 p-2 w-full border rounded"
+          placeholder="Enter Engine"
+        />
+      </div>
+      <div className="mb-4">
+        <input
+          type="text"
+          id="power"
+          name="power"
+          value={props.formData.power}
+          onChange={(e) =>
+            props.handleInputChange(e.target.name, e.target.value)
+          }
+          className="mt-1 p-2 w-full border rounded"
+          placeholder="Enter Power"
+        />
+      </div>
+      <div className="mb-4">
+        <input
+          type="text"
+          id="driveType"
+          name="driveType"
+          value={props.formData.driveType}
+          onChange={(e) =>
+            props.handleInputChange(e.target.name, e.target.value)
+          }
+          className="mt-1 p-2 w-full border rounded"
+          placeholder="Enter Drive Type"
+        />
+      </div>
+      <div className="mb-4">
+        <input
+          type="text"
+          id="torque"
+          name="torque"
+          value={props.formData.torque}
+          onChange={(e) =>
+            props.handleInputChange(e.target.name, e.target.value)
+          }
+          className="mt-1 p-2 w-full border rounded"
+          placeholder="Enter Torque"
+        />
+      </div>
+      <div className="mb-4">
+        <input
+          type="text"
+          id="batteryCapacity"
+          name="batteryCapacity"
+          value={props.formData.batteryCapacity}
+          onChange={(e) =>
+            props.handleInputChange(e.target.name, e.target.value)
+          }
+          className="mt-1 p-2 w-full border rounded"
+          placeholder="Enter Battery Capacity"
+        />
+      </div>
+      <div className="mb-4">
+        <input
+          type="text"
+          id="topSpeed"
+          name="topSpeed"
+          value={props.formData.topSpeed}
+          onChange={(e) =>
+            props.handleInputChange(e.target.name, e.target.value)
+          }
+          className="mt-1 p-2 w-full border rounded"
+          placeholder="Enter Top Speed"
+        />
+      </div>
+      <div className="mb-4">
+        <input
+          type="text"
+          id="chargingTime"
+          name="chargingTime"
+          value={props.formData.chargingTime}
+          onChange={(e) =>
+            props.handleInputChange(e.target.name, e.target.value)
+          }
+          className="mt-1 p-2 w-full border rounded"
+          placeholder="Enter Charging Time"
+        />
+      </div>
+      <div className="mb-4">
+        <input
+          type="text"
+          id="range"
+          name="range"
+          value={props.formData.range}
+          onChange={(e) =>
+            props.handleInputChange(e.target.name, e.target.value)
+          }
+          className="mt-1 p-2 w-full border rounded"
+          placeholder="Enter Range"
+        />
+      </div>
+      <div className="mb-4">
+        <input
+          type= "text"
+          id="rating"
+          name="rating"
+          value={props.formData.rating}
+          onChange={(e) =>
+            props.handleInputChange(e.target.name, e.target.value)
+          }
+          className="mt-1 p-2 w-full border rounded"
+          placeholder="Enter Rating Out of 5"
+        />
+      </div>
+
 
       <div className="flex justify-end">
         <button

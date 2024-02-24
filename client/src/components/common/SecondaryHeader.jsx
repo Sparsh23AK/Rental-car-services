@@ -9,14 +9,14 @@ export default function SecondaryHeader() {
   return (
     <div className="bg-white p-1">
       <div className="flex justify-between mx-auto max-w-6xl items-center p-1">
-        <ul className="flex gap-4 text-lg font-medium text-[#69696a]">
+        <ul className="flex gap-4 text-base font-medium text-[#69696a]">
           <Link to="/" className="linkStyle">
             <li>
               <select
                 id="newCars"
                 name="newCars"
                 className="px-4"
-                value="New Cars"
+                defaultValue="New Cars"
               >
                 <option className="font-normal text-sm" value="New Cars">
                   New Cars

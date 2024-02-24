@@ -139,11 +139,12 @@ export default function Home() {
                       onChange={(e) => setPriceRange(e.target.value)}
                     >
                       <option value="">Select Budget</option>
-                      <option value="100000 to 500000">1 - 5 Lakh</option>
-                      <option value="500000 to 1000000">5 - 10 Lakh</option>
+                      <option value="100000 to 1000000">1 - 10 Lakh</option>
                       <option value="1000000 to 1500000">10 - 15 Lakh</option>
                       <option value="1500000 to 2000000">15 - 20 Lakh</option>
                       <option value="2000000 to 5000000">20 - 50 Lakh</option>
+                      <option value="5000000 to 10000000">Above 50 Lakh</option>
+                      <option value=" ">All Budget</option>
                     </select>
                     <select
                       id="vehical_type"
@@ -158,6 +159,7 @@ export default function Home() {
                       <option value="HatchBack">HatchBack</option>
                       <option value="MUV">MUV</option>
                       <option value="Luxury">Luxury</option>
+                      <option value=" ">All</option>
                     </select>
                     <div className="flex items-end justify-end col-span-2">
                       <button

@@ -4,9 +4,8 @@ import React, { useState, useEffect } from "react";
 
 const Card = ({ car }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const { name, price, image1, image2, image3 } = car;
+  const { name, price, image1, image2, image3, brand } = car;
   const images = [image1, image2, image3];
-
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) =>
@@ -39,14 +38,14 @@ const Card = ({ car }) => {
         </div>
       </div>
       <div className="pt-4 bottom-0 left-0 right-0">
-        <p className="text-lg font-bold p-2"> {formatPrice(price)}</p>
-        <button className="mt-2 w-full px-4 py-2 bg-white text-black border border-black  transition-all hover:bg-orange-500 hover:text-white hover:border-white">
+        <img src={brand.logo} alt={brand.make} className="h-16 w-12 p-1 ml-2 object-contain" />
+        <p className="text-lg font-bold p-2 ml-1"> {formatPrice(price)}</p>
+        <button className="mt-2 w-full px-4 py-2 bg-white text-black border border-black  transition-all hover:bg-orange-400 hover:text-white hover:border-white">
           Show Details
         </button>
       </div>
     </div>
   );
 };
-
 
 export default Card;

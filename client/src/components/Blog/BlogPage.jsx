@@ -18,7 +18,7 @@ const BlogPage = () => {
     <div className="container mx-auto py-8">
       <div className="max-w-5xl mx-auto bg-white shadow-md rounded-md p-6">
         <h1 className="text-3xl font-semibold text-black mb-4">{title}</h1>
-        <img src={imageUrl} alt={title} className="w-full h-auto mb-6 rounded-md" style={{ maxWidth: '100%', maxHeight: '400px' }} />
+        <img src={imageUrl} alt={title} className="w-full h-auto object-cover mb-6 rounded-md" style={{ maxWidth: '100%', maxHeight: '600px' }} />
         <div className="text-lg leading-relaxed">
           {content.split('\n').map((paragraph, index) => (
             <p key={index} className="mb-4 font-medium">{paragraph}</p>

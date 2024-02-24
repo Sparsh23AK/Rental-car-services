@@ -11,13 +11,16 @@ const Accordion = ({ title, cards, message, btn, viewOnly }) => {
     navigate(`/cars/viewcars/Electric`);
   };
 
+  // Slice the cards array to display only the first 4 cards
+  const displayedCards = cards.slice(0, 4);
+
   return (
     <div className="border border-gray-300 p-4 mb-4 w-full bg-white">
       <h2 className="text-xl font-bold mb-4 text-black">{title}</h2>
       <p className="text-md font-bold mb-4">{message}</p>
       <hr />
       <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {cards.map((card, index) => (
+        {displayedCards.map((card, index) => (
           <Card key={index} car={card} />
         ))}
       </div>
@@ -25,7 +28,7 @@ const Accordion = ({ title, cards, message, btn, viewOnly }) => {
         <div className="mt-4 border-t border-gray-300 pt-4">
           <button
             onClick={handleViewMoreElectricCars}
-            className="px-6 py-2 bg-white text-black border border-black transition-all hover:bg-orange-500 hover:text-white hover:border-white justify-self-start"
+            className="px-6 py-2 bg-white text-black border border-black transition-all hover:bg-orange-400 hover:text-white hover:border-white justify-self-start"
           >
             {btn}
           </button>

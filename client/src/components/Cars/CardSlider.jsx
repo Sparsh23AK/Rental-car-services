@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
+import { MdOutlineElectricalServices } from "react-icons/md";
 
 const CardSlider = ({ car, isElectric }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const { name, price, image1, image2, image3 } = car;
+  const { name, price, image1, image2, image3, brand } = car;
   const images = [image1, image2, image3];
 
   useEffect(() => {
@@ -36,10 +37,19 @@ const CardSlider = ({ car, isElectric }) => {
         />
       </div>
       <h3 className="p-3 text-lg font-bold">{name}</h3>
-      <div className="pt-2 bottom-0 left-0 right-0">
-        <p className="text-md font-bold p-2"> {formatPrice(price)}</p>
-        <button className={`mt-2 w-full px-4 py-2 rounded-lg bg-white text-black border border-black  transition-all
-         hover:bg-orange-500 hover:text-white hover:border-white ${isElectric && "hover:bg-green-300"}`}>
+      <div className="bottom-0 left-0 right-0">
+        <img
+          src={brand.logo}
+          alt={brand.make}
+          className="h-16 w-12 ml-2 object-contain"
+        />
+        <p className="text-md font-bold p-2 ml-1"> {formatPrice(price)}</p>
+        <button
+          className={`mt-2 w-full px-4 py-2 rounded-lg bg-white text-black border border-black  transition-all
+          hover:text-white hover:border-white ${
+            isElectric ? "hover:bg-green-300" : "hover:bg-orange-400"
+          }`}
+        >
           Show Details
         </button>
       </div>

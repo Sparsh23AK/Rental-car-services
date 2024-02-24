@@ -54,17 +54,30 @@ export const fetchCarsByPriceRangeAndType = async (req, res, next) => {
     const [minPrice, maxPrice] = priceRange.split(" to ").map(Number);
 
     // Find cars within the specified price range and vehicle type
-    const cars = await Car.find({
-      price: { $gte: minPrice, $lte: maxPrice },
-      carType: carType,
-    }).populate("brand");
-
+    let cars = [];
+    if (carType.trim() !== "" && priceRange.trim() !== "") {
+      cars = await Car.find({
+        price: { $gte: minPrice, $lte: maxPrice },
+        carType: carType,
+      }).populate("brand");
+    } else {
+      if (carType.trim() === "" && priceRange.trim() !== "") {
+        cars = await Car.find({
+          price: { $gte: minPrice, $lte: maxPrice },
+        }).populate("brand");
+      } else if (priceRange.trim() === "" && carType.trim() !== "") {
+        cars = await Car.find({
+          carType: carType,
+        }).populate("brand");
+      } else {
+        cars = await Car.find().populate("brand");
+      }
+    }
     res.json(cars);
   } catch (error) {
     next(error);
   }
 };
-
 
 export const fetchCarsByBrand = async (req, res, next) => {
   try {

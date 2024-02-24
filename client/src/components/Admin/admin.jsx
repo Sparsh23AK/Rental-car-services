@@ -26,6 +26,8 @@ const AdminDashboard = () => {
   const [successUpdateCar, setUpdateCarSuccess] = useState(false);
   const [errorDeleteCar, setDeleteCarError] = useState(false);
   const { brands } = useSelector((state) => state.brand);
+  const [currentPage, setCurrentPage] = useState(1);
+  const PAGE_SIZE = 5;
 
   const [selectedCar, setSelectedCar] = useState({
     _id: "",
@@ -44,7 +46,17 @@ const AdminDashboard = () => {
     image3: null,
     carType: "",
     isTrending: false,
-    isUpcoming: false
+    isUpcoming: false,
+    description: "",
+    engine: "",
+    power: "",
+    driveType: "",
+    torque: "",
+    batteryCapacity: "",
+    topSpeed: "",
+    chargingTime: "",
+    range: "",
+    rating: ""
   });
   const [prevImageUrls, setPrevImageUrls] = useState({
     image1: null,
@@ -68,7 +80,17 @@ const AdminDashboard = () => {
     image3: null,
     carType: "",
     isTrending: false,
-    isUpcoming: false
+    isUpcoming: false,
+    description: "",
+    engine: "",
+    power: "",
+    driveType: "",
+    torque: "",
+    batteryCapacity: "",
+    topSpeed: "",
+    chargingTime: "",
+    range: "",
+    rating: ""
   });
 
   const getInitialFormData = () => ({
@@ -87,12 +109,26 @@ const AdminDashboard = () => {
     image3: null,
     carType: "",
     isTrending: false,
-    isUpcoming: false
+    isUpcoming: false,
+    description: "",
+    engine: "",
+    power: "",
+    driveType: "",
+    torque: "",
+    batteryCapacity: "",
+    topSpeed: "",
+    chargingTime: "",
+    range: "",
+    rating: ""
   });
-  //Fetch cars data from backend
+  // Pagination logic
+  const startIndex = (currentPage - 1) * PAGE_SIZE;
+  const endIndex = startIndex + PAGE_SIZE;
+  const displayedCars = cars.slice(startIndex, endIndex);
+
   useEffect(() => {
     fetchData(); // Initial data fetch when the component mounts
-  }, []);
+  }, [currentPage]); // Fetch data whenever currentPage changes
 
   const fetchData = async () => {
     try {
@@ -161,7 +197,7 @@ const AdminDashboard = () => {
         body: JSON.stringify(formData),
       });
       const data = await response.json();
-      if (data.statusCode != 201) {
+      if (data.success === "false") {
         setAddCarError(true);
         return;
       } else {
@@ -320,6 +356,10 @@ const AdminDashboard = () => {
     setUpdateCarSuccess(false);
   };
 
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
   return (
     <div className="container mx-auto mt-8 h-screen md:h-[75vh]">
       <div className="flex justify-between mb-4 mx-auto max-w-7xl items-center p-3">
@@ -335,7 +375,7 @@ const AdminDashboard = () => {
       </div>
 
       {/* Dynamic Table */}
-      <table className="table-auto justify-between mx-auto  items-center">
+      <table className="table-auto justify-between mx-auto items-center">
         <thead>
           <tr>
             <th className="border-2 border-gray-700 px-4 py-2">Name</th>
@@ -354,35 +394,39 @@ const AdminDashboard = () => {
           </tr>
         </thead>
         <tbody>
-          {cars.map((car) => (
-            <tr className="text-center" key={car._id}>
-              <td className="border-2 border-gray-700 px-4 py-2">{car.name}</td>
-              <td className="border-2 border-gray-700 px-4 py-2">
+          {displayedCars.map((car) => (
+            <tr className="text-center text-sm text-black" key={car._id}>
+              <td className="border-2 border-gray-700 px-4 py-2 bg-yellow-200">
+                {car.name}
+              </td>
+              <td className="border-2 border-gray-700 px-4 py-2 bg-green-300">
                 {car.brand.make}
               </td>
-              <td className="border-2 border-gray-700 px-4 py-2">
+              <td className="border-2 border-gray-700 px-4 py-2 bg-pink-500">
                 {car.model}
               </td>
-              <td className="border-2 border-gray-700 px-4 py-2">{car.year}</td>
-              <td className="border-2 border-gray-700 px-4 py-2">
+              <td className="border-2 border-gray-700 px-4 py-2 bg-orange-400">
+                {car.year}
+              </td>
+              <td className="border-2 border-gray-700 px-4 py-2 bg-red-200">
                 {car.transmissionType}
               </td>
-              <td className="border-2 border-gray-700 px-4 py-2">
+              <td className="border-2 border-gray-700 px-4 py-2 bg-blue-200">
                 {car.fuelType}
               </td>
-              <td className="border-2 border-gray-700 px-4 py-2">
+              <td className="border-2 border-gray-700 px-4 py-2 bg-green-200">
                 {car.mileage}
               </td>
-              <td className="border-2 border-gray-700 px-4 py-2">
+              <td className="border-2 border-gray-700 px-4 py-2 bg-red-500">
                 {car.rental_price}
               </td>
-              <td className="border-2 border-gray-700 px-4 py-2">
+              <td className="border-2 border-gray-700 px-4 py-2 bg-blue-600">
                 {car.price}
               </td>
-              <td className="border-2 border-gray-700 px-4 py-2">
+              <td className="border-2 border-gray-700 px-4 py-2 bg-pink-600">
                 {car.carType}
               </td>
-              <td className="border-2 border-gray-700 px-4 py-2">
+              <td className="border-2 border-gray-700 px-4 py-2 bg-gray-200">
                 <button
                   className="bg-yellow-500 text-white px-2 py-1 rounded mr-2"
                   onClick={() => selectCar(car)}
@@ -400,6 +444,27 @@ const AdminDashboard = () => {
           ))}
         </tbody>
       </table>
+      {/* Pagination */}
+      <div className="flex justify-center mt-4">
+        <ul className="flex gap-2">
+          {Array.from(
+            { length: Math.ceil(cars.length / PAGE_SIZE) },
+            (_, i) => (
+              <li
+                key={i + 1}
+                className={`px-3 py-1 rounded cursor-pointer ${
+                  currentPage === i + 1
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-200 hover:bg-gray-300"
+                }`}
+                onClick={() => handlePageChange(i + 1)}
+              >
+                {i + 1}
+              </li>
+            )
+          )}
+        </ul>
+      </div>
 
       {isAddCarModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
