@@ -45,7 +45,7 @@ export default function Home() {
       setElectricCars(() => cars.filter((car) => car.fuelType === "Electric"));
       setUpcomingCars(() => cars.filter((car) => car.isUpcoming === true));
       setTrendingCars(() => cars.filter((car) => car.isTrending === true));
-      setLoading(false); // Set loading to false after data is fetched
+      setLoading(false);
     } catch (error) {
       dispatch(fetchCarsFailure(error));
       console.error("Error fetching data:", error);
@@ -67,12 +67,6 @@ export default function Home() {
     }
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   fetchCarsByPriceRange(priceRange, carType);
-  // };
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (priceRange && carType) {
@@ -81,7 +75,6 @@ export default function Home() {
       navigate(`/cars/viewcars/${encodedPriceRange}/${encodedCarType}`);
     }
   };
-
 
   const fetchCarsByPriceRange = async (priceRange, carType) => {
     try {
@@ -179,6 +172,7 @@ export default function Home() {
               </div>
             </div>
           </div>
+
           {/* Trending cars */}
           <div className="container max-w-7xl mx-auto mt-8">
             <Accordion
@@ -218,6 +212,13 @@ export default function Home() {
               cards={upComingCars}
               viewOnly={true}
               btn=""
+            />
+          </div>
+          <div className="container object-contain max-w-full">
+            <img
+              src="https://bmw.scene7.com/is/image/BMW/iX_Banner:16to9?fmt=webp&wid=2560&hei=1440"
+              className="w-full h-[75vh] object-cover"
+              alt="BMW iX Banner"
             />
           </div>
         </>

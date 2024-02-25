@@ -14,16 +14,16 @@ export default function Header() {
         <Link to="/">
           <img
             src={myImage}
-            className="object-cover h-12 w-48 rounded-lg border border-black"
+            className="object-cover h-12 w-48 rounded-lg border border-black "
             alt="Carental Logo"
           />
         </Link>
-        <ul className="flex gap-4 text-md font-medium text-[#24272c]">
+        <ul className="flex gap-4 text-md font-medium text-[#24272c] ">
           <Link to="/">
-            <li>Home</li>
+            <li className="hover:text-orange-400">Home</li>
           </Link>
           <Link to="/about">
-            <li>About</li>
+            <li className="hover:text-orange-400">About</li>
           </Link>
           <Link to="/profile">
             {currentUser ? (

@@ -17,7 +17,7 @@ export const getCars = async (req, res, next) => {
 //get Car Info by Id
 export const getCarById = async (req, res, next) => {
   try {
-    const carId = req.params.carId;
+    const carId = req.params.id;
 
     // Retrieve the car from the database by ID
     const car = await Car.findById(carId).populate("brand");

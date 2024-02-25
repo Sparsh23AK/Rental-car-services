@@ -12,6 +12,8 @@ import Footer from "./components/common/Footer.jsx";
 import Blogs from "./components/Blog/Blogs.jsx";
 import BlogPage from "./components/Blog/BlogPage.jsx";
 import ViewCars from "./components/Cars/ViewCars.jsx";
+import ViewCarsByBrand from "./components/Cars/ViewCarsByBrand.jsx";
+import ViewCar from "./components/Cars/ViewCar.jsx";
 
 export default function App() {
   return (
@@ -35,6 +37,14 @@ export default function App() {
         <Route
           path="/cars/viewcars/:fuelType"
           element={<ViewCars />}
+        />
+        <Route
+          path="/cars/by-brand/:make"
+          element={<ViewCarsByBrand />}
+        />
+        <Route
+          path="/cars/viewcar/:id"
+          element={<ViewCar />}
         />
       </Routes>
       <Footer />

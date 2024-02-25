@@ -2,11 +2,13 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { MdOutlineElectricalServices } from "react-icons/md";
+import { Link, useNavigate } from "react-router-dom";
 
 const CardSlider = ({ car, isElectric }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const { name, price, image1, image2, image3, brand } = car;
+  const { name, price, image1, image2, image3, brand, _id } = car;
   const images = [image1, image2, image3];
+  const navigate = useNavigate();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -25,6 +27,10 @@ const CardSlider = ({ car, isElectric }) => {
     } else {
       return `₹ ${(price / 10000000).toFixed(1)} Crore`;
     }
+  };
+
+  const showDetails = () => {
+    navigate(`/cars/viewcar/${_id}`);
   };
 
   return (
@@ -49,6 +55,7 @@ const CardSlider = ({ car, isElectric }) => {
           hover:text-white hover:border-white ${
             isElectric ? "hover:bg-green-300" : "hover:bg-orange-400"
           }`}
+          onClick={() => showDetails()}
         >
           Show Details
         </button>
