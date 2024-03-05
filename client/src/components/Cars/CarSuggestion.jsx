@@ -42,7 +42,7 @@ const CarSuggestions = ({ type, currentBrand, currentCarType, fuelType }) => {
   };
 
   return (
-    <div className="border border-gray-300 rounded-md mt-8 p-4">
+    <div className="shadow-lg rounded-md mt-8 p-4 mb-8">
       <h2 className="font-bold text-2xl">Suggested {title} </h2>
       {type === "carType" ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

@@ -35,7 +35,8 @@ const carSchema = new mongoose.Schema({
   chargingTime: {type: String},
   range: {type: String},
   torque: {type: String},
-  rating: {type: String}
+  rating: {type: String},
+  description: {type: String}
 });
 
 const Car = mongoose.model("Car", carSchema);

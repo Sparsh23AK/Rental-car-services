@@ -1,13 +1,15 @@
 /* eslint-disable no-unused-vars */
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { app } from "../../firebase.js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { signInFailure, signInSuccess } from "../../redux/user/userSlice.js";
 import { useDispatch } from "react-redux";
 
 export default function OAuth() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
+
   const handleClick = async () => {
     try {
       const provider = new GoogleAuthProvider();
@@ -25,12 +27,12 @@ export default function OAuth() {
         }),
       });
       const data = await res.json();
-      if(data.success == false){
-        dispatch(signInFailure())
+      if (data.success == false) {
+        dispatch(signInFailure());
         return;
       }
       dispatch(signInSuccess(data));
-      navigate('/');
+      navigate(location.state?.from || "/");
     } catch (error) {
       console.log("Couldn't connect to Google", error);
     }

@@ -17,7 +17,7 @@ import {
   deleteUserFailure,
   deleteUserStart,
   deleteUserSuccess,
-  signOut
+  signOut,
 } from "../redux/user/userSlice.js";
 
 export default function Profile() {
@@ -30,12 +30,27 @@ export default function Profile() {
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [appointments, setAppointments] = useState([]);
 
   useEffect(() => {
     if (image) {
       handleFileUpload(image);
     }
+    fetchAppointments();
   }, [image]);
+
+  const fetchAppointments = async () => {
+    try {
+      const response = await fetch(
+        `/api/user/getAppointments/${currentUser._id}`
+      );
+      const data = await response.json();
+      console.log(data);
+      setAppointments(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   const handleFileUpload = async (image) => {
     const storage = getStorage(app);
@@ -111,19 +126,20 @@ export default function Profile() {
   };
 
   //Sign out user
-  const handleSignOut = async() => {
+  const handleSignOut = async () => {
     try {
-      await fetch('api/auth/signout')
+      await fetch("api/auth/signout");
       dispatch(signOut());
-      navigate("/sign-in")
+      navigate("/sign-in");
     } catch (error) {
-      console.log(error);      
+      console.log(error);
     }
   };
 
   return (
     <div>
       {!error ? (
+        <>
         <div className="p-3 max-w-lg mx-auto">
           <h1 className="test-3xl font-semibold text-center my-7">Profile</h1>
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -201,11 +217,16 @@ export default function Profile() {
             {updateSuccess && "User details are updated successfully !!"}
           </p>
         </div>
+        {appointments.length != 0 && 
+        <div className="max-w-2xl mx-auto p-8 m-8 shadow-md">
+        <h1>Your Appointments</h1>
+        </div>}
+        </>
       ) : (
         <div className="p-3 max-w-lg mx-auto">
           {error && (
             <ErrorPopUp message={"Something went wrong!!"} close={closePopUp} />
-          ) }
+          )}
         </div>
       )}
     </div>

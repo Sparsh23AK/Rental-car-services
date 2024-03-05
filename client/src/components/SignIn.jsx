@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import ErrorPopUp from "./utils/errorPopUp";
 import {
   signInFailure,
@@ -16,6 +16,7 @@ export default function SignIn() {
   const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -38,7 +39,8 @@ export default function SignIn() {
         return;
       } else {
         dispatch(signInSuccess(data));
-        navigate("/");
+        console.log("from sign in ", location.state?.from);
+        navigate(location.state?.from || "/");
       }
     } catch (error) {
       dispatch(signInFailure(error));

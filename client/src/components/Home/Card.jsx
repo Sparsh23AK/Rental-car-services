@@ -24,9 +24,9 @@ const Card = ({ car }) => {
     if (price < 100000) {
       return `₹ ${price}`;
     } else if (price < 10000000) {
-      return `₹ ${(price / 100000).toFixed(1)} Lakh`;
+      return `₹ ${(price / 100000).toFixed(2)} Lakh`;
     } else {
-      return `₹ ${(price / 10000000).toFixed(1)} Crore`;
+      return `₹ ${(price / 10000000).toFixed(2)} Crore`;
     }
   };
 

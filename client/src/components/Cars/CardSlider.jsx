@@ -23,9 +23,9 @@ const CardSlider = ({ car, isElectric }) => {
     if (price < 100000) {
       return `₹ ${price}`;
     } else if (price < 10000000) {
-      return `₹ ${(price / 100000).toFixed(1)} Lakh`;
+      return `₹ ${(price / 100000).toFixed(2)} Lakh`;
     } else {
-      return `₹ ${(price / 10000000).toFixed(1)} Crore`;
+      return `₹ ${(price / 10000000).toFixed(2)} Crore`;
     }
   };
 
@@ -49,7 +49,9 @@ const CardSlider = ({ car, isElectric }) => {
           alt={brand.make}
           className="h-16 w-12 ml-2 object-contain"
         />
-        <p className="text-md font-bold p-2 ml-1"> {formatPrice(price)}</p>
+        <span className="bg-orange-400">
+          <p className="text-lg font-bold p-2 ml-1"> {formatPrice(price)}</p>
+        </span>
         <button
           className={`mt-2 w-full px-4 py-2 rounded-lg bg-white text-black border border-black  transition-all
           hover:text-white hover:border-white ${

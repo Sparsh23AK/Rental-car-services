@@ -11,8 +11,8 @@ export default function SecondaryHeader() {
     console.log(e);
     if (e === "Electric Cars") {
       navigate(`/cars/viewcars/Electric`);
-    }else{
-      navigate("/")
+    } else {
+      navigate("/");
     }
   };
 
@@ -37,7 +37,9 @@ export default function SecondaryHeader() {
             </select>
           </li>
           <Link to="/" className="linkStyle">
-            <li className="px-4">Rentals</li>
+            <li title="Currently Unavailable." className="px-4">
+              Rentals
+            </li>
           </Link>
           <Link to="/blog" className="linkStyle">
             <li className="px-4">Blogs</li>
