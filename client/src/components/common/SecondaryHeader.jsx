@@ -8,7 +8,6 @@ export default function SecondaryHeader() {
   const navigate = useNavigate();
 
   const handleClick = (e) => {
-    console.log(e);
     if (e === "Electric Cars") {
       navigate(`/cars/viewcars/Electric`);
     } else {

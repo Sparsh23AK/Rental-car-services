@@ -88,7 +88,6 @@ const ViewCars = () => {
 
   const handleFilterByBrand = (brand) => {
     setSelectedBrand(brand);
-    console.log(brand);
     const filteredCars = allCars.filter((car) => car.brand.make === brand);
     setCars(filteredCars);
   };

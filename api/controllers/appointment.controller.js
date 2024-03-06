@@ -11,7 +11,6 @@ export const bookAppointment = async (req, res, next) => {
       const { user, car, date, phoneNumber } = req.body;
       const newAppointment = new Appointment({user , car, phoneNumber, date})
       const appointment = await newAppointment.save();
-      console.log(appointment);
       res.status(201).json(appointment);
     } catch (error) {
       next(error);
@@ -26,9 +25,18 @@ export const getAppointments = async (req, res, next) => {
     const appoitments = await Appointment.find({
       user: userId
     }).populate('car');
-    console.log(appoitments);
     res.json(appoitments);
   } catch (error) {
     next(error);
   }
 };
+
+//Delete appointment
+export const deleteAppointment = async (req, res, next) =>{
+  try {
+    await Appointment.findByIdAndDelete(req.params.id);
+    res.status(200).json({message : "Deleted Successfully"});
+  } catch(error){
+    next(error);
+  }
+}

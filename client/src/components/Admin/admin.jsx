@@ -135,14 +135,12 @@ const AdminDashboard = () => {
       const response = await fetch("/api/admin/getCars");
       const data = await response.json();
       setCars(data);
-      console.log(data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
   const handleFileUpload = async (e) => {
-    console.log("On change called");
     const { name, files } = e.target;
     const imageFile = files[0];
     try {
@@ -214,7 +212,6 @@ const AdminDashboard = () => {
   };
 
   const handleInputChange = (name, value) => {
-    console.log(name, value);
     setFormData({
       ...formData,
       [name]: value,
@@ -241,7 +238,6 @@ const AdminDashboard = () => {
   const selectCar = async (car) => {
     setSelectedCar(car);
     setUpdateModalOpen(true);
-    console.log(car);
     setPrevImageUrls({
       image1: car.image1,
       image2: car.image2,
@@ -288,7 +284,6 @@ const AdminDashboard = () => {
   };
 
   const handleUpdateFileUpload = async (e) => {
-    console.log("On change called");
     const { name, files } = e.target;
     const imageFile = files[0];
     try {

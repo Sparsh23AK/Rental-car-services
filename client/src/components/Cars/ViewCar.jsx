@@ -32,11 +32,12 @@ const ViewCar = () => {
   const location = useLocation();
   const [errorPopup, seterrorPopup] = useState(false);
   const [successPopup, setsuccessPopup] = useState(false);
+  const [phoneNumberError, setPhoneNumberError] = useState("");
 
   const [formData, setFormData] = useState({
     date: "",
     phoneNumber: "+91 ",
-    car: id,
+    car: "",
     user: currentUser._id,
   });
 
@@ -57,14 +58,25 @@ const ViewCar = () => {
 
   const handleChange = (e) => {
     const { id, value } = e.target;
+    if (id === "phoneNumber") {
+      if (!/^\+91 [1-9]\d{9}$/.test(value)) {
+        setPhoneNumberError(
+          "Please enter a valid Indian phone number starting with +91"
+        );
+      } else {
+        setPhoneNumberError("");
+      }
+    }
     setFormData({
       ...formData,
       [id]: value,
+      car: car._id
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     if (!currentUser) {
       // User is not logged in, show login popup
       setShowLoginPopup(true);
@@ -78,11 +90,9 @@ const ViewCar = () => {
           body: JSON.stringify(formData),
         });
         const data = await response.json();
-        if (data.success === "false") {
-          console.log("error");
+        if (data.success === "false" || data.statusCode === 500) {
           seterrorPopup(true);
         } else {
-          console.log("Form submitted:", formData);
           setsuccessPopup(true);
         }
       } catch (error) {
@@ -271,6 +281,7 @@ const ViewCar = () => {
   };
   const closeSuccessPopUp = () => {
     setsuccessPopup(false);
+    navigate("/profile")
   };
 
   return (
@@ -320,6 +331,9 @@ const ViewCar = () => {
                     className="border-b border-gray-300 rounded-md p-1 focus:outline-none focus:border-orange-500"
                     placeholder="+91"
                   />
+                  {phoneNumberError && (
+                    <p className="text-red-500">{phoneNumberError}</p>
+                  )}
                 </div>
                 <div className="mt-4">
                   <button
@@ -371,7 +385,9 @@ const ViewCar = () => {
       )}
       {successPopup && (
         <SuccessPopUp
-          message={"Succesfully Booked an Appointment!! Check your profile you see appointment history."}
+          message={
+            "Succesfully Booked an Appointment!! Check your profile you see appointment history."
+          }
           close={closeSuccessPopUp}
         />
       )}

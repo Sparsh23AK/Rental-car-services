@@ -1,7 +1,7 @@
 import express from "express";
 import { user, updateUser, deleteUser } from "../controllers/user.controller.js";
 import { verfifyToken } from "../utils/authenticateUser.js";
-import { bookAppointment, getAppointments } from "../controllers/appointment.controller.js"
+import { bookAppointment, getAppointments, deleteAppointment } from "../controllers/appointment.controller.js"
 
 const router = express.Router();
 
@@ -21,6 +21,6 @@ router.get("/getAppointments/:id", verfifyToken, getAppointments);
 router.post("/bookAppointment", verfifyToken, bookAppointment);
 
 //cancel appointment by appoint's ID
-router.delete("/deleteAppointment/:id", verfifyToken);
+router.delete("/deleteAppointment/:id", verfifyToken, deleteAppointment);
 
 export default router;
