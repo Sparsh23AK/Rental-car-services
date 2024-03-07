@@ -46,7 +46,10 @@ export default function Profile() {
   const fetchAppointments = async () => {
     try {
       const response = await fetch(
-        `/api/user/getAppointments/${currentUser._id}`
+        `/api/user/getAppointments/${currentUser._id}`, {
+          headers:{
+            accept: 'application/json'          }
+        }
       );
       const data = await response.json();
       setAppointments(data);
@@ -131,7 +134,11 @@ export default function Profile() {
   //Sign out user
   const handleSignOut = async () => {
     try {
-      await fetch("api/auth/signout");
+      await fetch("api/auth/signout", {
+        headers:{
+          accept: 'application/json',
+        }
+      });
       dispatch(signOut());
       navigate("/sign-in");
     } catch (error) {

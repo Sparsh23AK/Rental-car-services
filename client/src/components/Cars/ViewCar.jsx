@@ -104,7 +104,11 @@ const ViewCar = () => {
   const fetchCarById = async (id) => {
     try {
       const url = `/api/cars/getCarById/${id}`;
-      const response = await fetch(url);
+      const response = await fetch(url, {
+        headers:{
+          accept: 'application/json',
+        }
+      });
       const data = await response.json();
       setCar(data);
       setLoading(false);

@@ -132,7 +132,11 @@ const AdminDashboard = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("/api/admin/getCars");
+      const response = await fetch("/api/admin/getCars", {
+        headers:{
+          accept: 'application/json',
+        }
+      });
       const data = await response.json();
       setCars(data);
     } catch (error) {

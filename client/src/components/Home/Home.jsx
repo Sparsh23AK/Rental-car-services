@@ -39,7 +39,11 @@ export default function Home() {
   const fetchData = async () => {
     try {
       dispatch(fetchCarsStart());
-      const response = await fetch("/api/cars/getCars");
+      const response = await fetch("/api/cars/getCars", {
+        headers:{
+          accept: 'application/json',
+        }
+      });
       const data = await response.json();
       dispatch(fetchCarsSuccess(data));
       setElectricCars(() => cars.filter((car) => car.fuelType === "Electric"));
@@ -55,7 +59,11 @@ export default function Home() {
   const fetchBrands = async () => {
     try {
       dispatch(fetchBrandStart());
-      const response = await fetch("/api/cars/getBrands");
+      const response = await fetch("/api/cars/getBrands", {
+        headers:{
+          accept: 'application/json',
+        }
+      });
       const data = await response.json();
       if (data.success === false) {
         dispatch(fetchBrandFailure(data));
@@ -79,7 +87,11 @@ export default function Home() {
   const fetchCarsByPriceRange = async (priceRange, carType) => {
     try {
       const url = `/api/cars/fetchCarsByPriceRangeAndType?priceRange=${priceRange}&carType=${carType}`;
-      const response = await fetch(url);
+      const response = await fetch(url, {
+        headers: {
+          accept: "application/json",
+        },
+      });
       const data = await response.json();
       // Handle the data (array of cars) received from the backend
     } catch (error) {
@@ -92,7 +104,11 @@ export default function Home() {
 
   const fetchCarsByBrand = async (brandId) => {
     try {
-      const response = await fetch(`/api/cars/brand?brandId=${brandId}`);
+      const response = await fetch(`/api/cars/brand?brandId=${brandId}`, {
+        headers: {
+          accept: "application/json",
+        },
+      });
       if (!response.ok) {
         throw new Error("Failed to fetch cars by brand");
       }

@@ -37,7 +37,11 @@ const ViewCars = () => {
   const fetchCarsByPriceRange = async (priceRange, carType) => {
     try {
       const url = `/api/cars/fetchCarsByPriceRangeAndType?priceRange=${priceRange}&carType=${carType}`;
-      const response = await fetch(url);
+      const response = await fetch(url, {
+        headers:{
+          accept: 'application/json',
+        }
+      });
       const data = await response.json();
       return data;
     } catch (error) {
