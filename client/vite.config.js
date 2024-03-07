@@ -9,6 +9,7 @@ export default defineConfig({
     proxy: {
       "/api": {
         // target: "http://localhost:3000",
+        target: "https://carentalv-1.onrender.com",
         changeOrigin: true,
       },
     },
