@@ -7,7 +7,7 @@ export const getCars = async (req, res, next) => {
   try {
     // Retrieve all cars from the database
     const cars = await Car.find().populate("brand");
-
+    console.log(cars);
     res.json(cars);
   } catch (error) {
     next(error);
@@ -41,7 +41,7 @@ export const getBrands = async (req, res, next) => {
     if (!brands) {
       return next(errorHandler(404, "brands not found"));
     }
-
+    console.log(brands);
     res.json(brands);
   } catch (error) {
     next(error);
