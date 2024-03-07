@@ -7,6 +7,7 @@ import carsRoute from "./routes/car.route.js"
 import adminRoute from "./routes/admin.route.js"
 import cookieParser from "cookie-parser";
 import path from 'path';
+import bodyParser from "body-parser";
 
 dotenv.config();
 
@@ -33,6 +34,7 @@ app.listen(3000, () => {
 });
 //accepting json as request body from client.
 app.use(express.json());
+app.use(bodyParser.json());
 
 app.use(cookieParser());
 
