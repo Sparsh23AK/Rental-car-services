@@ -14,8 +14,10 @@ import BlogPage from "./components/Blog/BlogPage.jsx";
 import ViewCars from "./components/Cars/ViewCars.jsx";
 import ViewCarsByBrand from "./components/Cars/ViewCarsByBrand.jsx";
 import ViewCar from "./components/Cars/ViewCar.jsx";
+import NotFound from "./components/common/NotFound.jsx";
 
 export default function App() {
+
   return (
     <BrowserRouter>
       <Header />
@@ -34,19 +36,12 @@ export default function App() {
           path="/cars/viewcars/:priceRange/:carType"
           element={<ViewCars />}
         />
-        <Route
-          path="/cars/viewcars/:fuelType"
-          element={<ViewCars />}
-        />
-        <Route
-          path="/cars/by-brand/:make"
-          element={<ViewCarsByBrand />}
-        />
-        <Route
-          path="/cars/viewcar/:id"
-          element={<ViewCar />}
-        />
+        <Route path="/cars/viewcars/:fuelType" element={<ViewCars />} />
+        <Route path="/cars/by-brand/:make" element={<ViewCarsByBrand />} />
+        <Route path="/cars/viewcar/:id" element={<ViewCar />} />
+        <Route path="*" element={<NotFound />} /> {/* Route for NotFound component */}
       </Routes>
+
       <Footer />
     </BrowserRouter>
   );

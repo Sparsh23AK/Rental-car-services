@@ -51,15 +51,25 @@ const Footer = () => {
               </Link>
             </div>
             <div className="flex items-center space-x-4 ">
-              <FaXTwitter className="text-black hover:text-gray-500 hover:cursor-pointer" />
-              <FaLinkedin className="text-blue-600 hover:text-gray-500 hover:cursor-pointer" />
-              <FaGithub className="text-black hover:text-gray-500 hover:cursor-pointer" />
+              {/* <FaXTwitter className="text-black hover:text-gray-500 hover:cursor-pointer" /> */}
+              <a
+                href="https://linkedin.com/in/sparsh-giri-b33881217"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaLinkedin className="text-blue-600 hover:text-gray-500 hover:cursor-pointer" />
+              </a>
+              <a
+                href="https://github.com/Sparsh23AK/Rental-car-services"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaGithub className="text-black hover:text-gray-500 hover:cursor-pointer" />
+              </a>
             </div>
           </div>
           <div className="text-gray-600 text-center">
-            <span>
-              &copy; {currentYear} Carental. All rights reserved.
-            </span>
+            <span>&copy; {currentYear} Carental. All rights reserved.</span>
           </div>
         </div>
       </div>
