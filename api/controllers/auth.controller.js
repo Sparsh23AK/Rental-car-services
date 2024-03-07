@@ -30,7 +30,7 @@ export const signin = async (req, res, next) => {
     if (!validPassword) return next(errorHandler(401, "Invalid Credentials!"));
     const token = jwt.sign({ id: userDetail._id }, process.env.JWT_SECRET);
     const { password: hashedPassword, ...rest } = userDetail._doc;
-    const expiryDate = 60 * 60 * 24 * 5 * 1000;
+    const expiryDate = new Date(Date.now() + 60 * 60 * 24 * 5 * 1000);
     res
       .cookie("access_token", token, { httpOnly: true, expires: expiryDate })
       .status(200)
