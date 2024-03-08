@@ -8,12 +8,12 @@ import adminRoute from "./routes/admin.route.js"
 import cookieParser from "cookie-parser";
 import path from 'path';
 // import bodyParser from "body-parser";
-// import cors from "cors";
+import cors from "cors";
 
 dotenv.config();
 
 const app = express();
-// app.use(cors());
+app.use(cors({origin : "https://carentalv-1.onrender.com"}));
 
 mongoose
   .connect(process.env.MongoDbUri)
@@ -32,12 +32,11 @@ app.get('*', (req, res)=>{
   res.sendFile(path.join(__dirname, 'client','dist','index.html'))
 });
 
-// app.listen(3000, () => {
-//   console.log("Server running at port 3000.");
-// });
+app.listen(3000, () => {
+  console.log("Server running at port 3000.");
+});
 //accepting json as request body from client.
 app.use(express.json());
-// app.use(bodyParser.json());
 
 app.use(cookieParser());
 
