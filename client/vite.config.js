@@ -10,7 +10,7 @@ export default defineConfig({
       "/api": {
         // target: "http://localhost:3000",
         target: "https://carentalv-1.onrender.com",
-        changeOrigin: true,
+        // changeOrigin: true,
       },
     },
   },

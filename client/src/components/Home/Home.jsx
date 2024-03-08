@@ -39,7 +39,7 @@ export default function Home() {
   const fetchData = async () => {
     try {
       dispatch(fetchCarsStart());
-      const response = await fetch("/api/cars/getCars", {
+      const response = await fetch("https://carentalv-1.onrender.com/api/cars/getCars", {
         method: "GET",
         headers:{
           'Content-Type': 'application/json',
@@ -106,7 +106,7 @@ export default function Home() {
 
   const fetchCarsByBrand = async (brandId) => {
     try {
-      const response = await fetch(`/api/cars/brand?brandId=${brandId}`, {
+      const response = await fetch(`https://carentalv-1.onrender.com/api/cars/brand?brandId=${brandId}`, {
         headers: {
           accept: "application/json",
         },
