@@ -8,8 +8,8 @@ export default defineConfig({
     host: true,
     proxy: {
       "/api": {
-        target: "http://localhost:3000",
-        // target: "https://carentalv-1.onrender.com",
+        // target: "http://localhost:3000",
+        target: "https://carentalv-1.onrender.com",
         changeOrigin: true,
       },
     },
