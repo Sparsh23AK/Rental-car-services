@@ -28,9 +28,7 @@ const __dirname = path.resolve();
 //for server to initialize
 app.use(express.static(path.join(__dirname, '/client/dist')));
 
-app.use('*', (req, res)=>{
-  res.sendFile(path.join(__dirname, 'client','dist','index.html'))
-});
+
 
 app.listen(3000, () => {
   console.log("Server running at port 3000.");
@@ -63,4 +61,8 @@ app.use((err, req, res, next) => {
     message,
     statusCode,
   });
+});
+
+app.use('*', (req, res)=>{
+  res.sendFile(path.join(__dirname, 'client','dist','index.html'))
 });
