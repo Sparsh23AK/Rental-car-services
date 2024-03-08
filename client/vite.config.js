@@ -6,12 +6,12 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: true,
-    proxy: {
-      "/api": {
-        // target: "http://localhost:3000",
-        target: "https://carentalv-1.onrender.com",
-        // changeOrigin: true,
-      },
-    },
+    // proxy: {
+    //   "/api": {
+    //     // target: "http://localhost:3000",
+    //     target: "https://carentalv-1.onrender.com",
+    //     changeOrigin: true,
+    //   },
+    // },
   },
 });
