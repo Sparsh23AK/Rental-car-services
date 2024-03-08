@@ -41,7 +41,7 @@ export default function Home() {
       dispatch(fetchCarsStart());
       const response = await fetch("/api/cars/getCars", {
         headers:{
-          accept: 'application/json',
+          'Content-Type': 'application/json',
         }
       });
       const data = await response.json();
@@ -61,7 +61,7 @@ export default function Home() {
       dispatch(fetchBrandStart());
       const response = await fetch("/api/cars/getBrands", {
         headers:{
-          accept: 'application/json',
+          'Content-Type': 'application/json',
         }
       });
       const data = await response.json();
