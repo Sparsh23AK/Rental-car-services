@@ -8,12 +8,12 @@ import adminRoute from "./routes/admin.route.js"
 import cookieParser from "cookie-parser";
 import path from 'path';
 // import bodyParser from "body-parser";
-import cors from "cors";
+// import cors from "cors";
 
 dotenv.config();
 
 const app = express();
-app.use(cors());
+// app.use(cors());
 
 mongoose
   .connect(process.env.MongoDbUri)

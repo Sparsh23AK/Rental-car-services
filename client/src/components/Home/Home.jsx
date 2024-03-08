@@ -34,30 +34,23 @@ export default function Home() {
   useEffect(() => {
     fetchData(); // Initial data fetch when the component mounts
     fetchBrands(); // Fetching brands
-    setElectricCars(() => cars.filter((car) => car.fuelType === "Electric"));
-    setUpcomingCars(() => cars.filter((car) => car.isUpcoming === true));
-    setTrendingCars(() => cars.filter((car) => car.isTrending === true));
   }, []);
 
   const fetchData = async () => {
     try {
       dispatch(fetchCarsStart());
-      await fetch("/api/cars/getCars", {
+      const response = await fetch("/api/cars/getCars", {
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((response) => response.json())
-      .then((data) => {
-        dispatch(fetchCarsSuccess(data));
-        setLoading(false);
-        console.log(data);
-      })
-      .catch((error) => console.log(error));
-      // console.log(data);
-      // const data = await response.json();
-      // dispatch(fetchCarsSuccess(data));
-
+        headers:{
+          'Content-Type': 'application/json',
+        }
+      });
+      console.log(data);
+      const data = await response.json();
+      dispatch(fetchCarsSuccess(data));
+      setElectricCars(() => cars.filter((car) => car.fuelType === "Electric"));
+      setUpcomingCars(() => cars.filter((car) => car.isUpcoming === true));
+      setTrendingCars(() => cars.filter((car) => car.isTrending === true));
       setLoading(false);
     } catch (error) {
       dispatch(fetchCarsFailure(error));
@@ -70,9 +63,9 @@ export default function Home() {
       dispatch(fetchBrandStart());
       const response = await fetch("/api/cars/getBrands", {
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers:{
+          'Content-Type': 'application/json'
+        }
       });
       const data = await response.json();
       if (data.success === false) {
