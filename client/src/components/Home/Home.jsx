@@ -40,7 +40,6 @@ export default function Home() {
     try {
       dispatch(fetchCarsStart());
       const response = await fetch("/api/cars/getCars", {
-        method: "GET",
         headers:{
           Accept: 'application/json'
         }
@@ -62,7 +61,6 @@ export default function Home() {
     try {
       dispatch(fetchBrandStart());
       const response = await fetch("/api/cars/getBrands", {
-        method: "GET",
         headers:{
           Accept: 'application/json'
         }
