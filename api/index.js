@@ -8,10 +8,12 @@ import adminRoute from "./routes/admin.route.js"
 import cookieParser from "cookie-parser";
 import path from 'path';
 // import bodyParser from "body-parser";
+import cors from "cors";
 
 dotenv.config();
 
 const app = express();
+app.use(cors());
 
 mongoose
   .connect(process.env.MongoDbUri)
@@ -25,6 +27,7 @@ mongoose
 const __dirname = path.resolve();
 //for server to initialize
 app.use(express.static(path.join(__dirname, '/client/dist')));
+
 app.get('*', (req, res)=>{
   res.sendFile(path.join(__dirname, 'client','dist','index.html'))
 });
