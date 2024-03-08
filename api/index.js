@@ -28,7 +28,7 @@ const __dirname = path.resolve();
 //for server to initialize
 app.use(express.static(path.join(__dirname, '/client/dist')));
 
-app.get('*', (req, res)=>{
+app.use('*', (req, res)=>{
   res.sendFile(path.join(__dirname, 'client','dist','index.html'))
 });
 
