@@ -40,6 +40,7 @@ export default function Home() {
     try {
       dispatch(fetchCarsStart());
       const response = await fetch("/api/cars/getCars", {
+        method: "GET",
         headers:{
           'Content-Type': 'application/json',
         }
@@ -60,8 +61,9 @@ export default function Home() {
     try {
       dispatch(fetchBrandStart());
       const response = await fetch("/api/cars/getBrands", {
+        method: "GET",
         headers:{
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         }
       });
       const data = await response.json();

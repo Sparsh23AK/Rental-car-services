@@ -7,7 +7,7 @@ export const getCars = async (req, res, next) => {
   try {
     // Retrieve all cars from the database
     const cars = await Car.find().populate("brand");
-    console.log(cars);
+    console.log("inside get Cars",cars.length);
     res.json(cars);
   } catch (error) {
     next(error);

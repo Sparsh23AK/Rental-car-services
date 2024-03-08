@@ -3,6 +3,7 @@ import {  getCarById, getCars, getBrands, fetchCarsByPriceRangeAndType, fetchCar
 
 const router = express.Router();
 
+console.log("inside Car routes");
 //Get cars info
 router.get('/getCars', getCars);
 
