@@ -28,9 +28,9 @@ const __dirname = path.resolve();
 //for server to initialize
 app.use(express.static(path.join(__dirname, '/client/dist')));
 
-app.get('*', (req, res)=>{
-  res.sendFile(path.join(__dirname, 'client','dist','index.html'))
-});
+// app.get('*', (req, res)=>{
+//   res.sendFile(path.join(__dirname, 'client','dist','index.html'))
+// });
 
 app.listen(3000, () => {
   console.log("Server running at port 3000.");
@@ -48,10 +48,10 @@ app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoute);
 
 //car Route
-app.use('/api/cars', carsRoute);
+app.get('/api/cars', carsRoute);
 
 //admin Route
-app.use('/api/admin', adminRoute);
+app.get('/api/admin', adminRoute);
 
 //Middleware
 app.use((err, req, res, next) => {
