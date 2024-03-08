@@ -45,8 +45,8 @@ export default function Home() {
           'Content-Type': 'application/json',
         }
       });
-      console.log(data);
       const data = await response.json();
+      console.log(data);
       dispatch(fetchCarsSuccess(data));
       setElectricCars(() => cars.filter((car) => car.fuelType === "Electric"));
       setUpcomingCars(() => cars.filter((car) => car.isUpcoming === true));
