@@ -45,7 +45,6 @@ export default function Home() {
         }
       });
       const data = await response.json();
-      console.log(data);
       dispatch(fetchCarsSuccess(data));
       setElectricCars(() => cars.filter((car) => car.fuelType === "Electric"));
       setUpcomingCars(() => cars.filter((car) => car.isUpcoming === true));
@@ -133,7 +132,7 @@ export default function Home() {
               className="w-full h-screen md:h-[75vh] object-cover"
               alt="Car Interior"
             />
-            <div className="absolute top-36 left-20 p-10 leading-10">
+            <div className="absolute md:top-36 md:left-20 p-10 leading-10 top-20 ">
               <h1 className="text-5xl font-bold text-white pb-2">
                 Buying your dream car?
               </h1>

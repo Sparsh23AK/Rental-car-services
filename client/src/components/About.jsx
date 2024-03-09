@@ -6,8 +6,8 @@ import profilepic from "../assets/profile-pic.jpeg";
 
 const About = () => {
   return (
-    <div className="max-w-4xl mx-auto p-12 flex">
-      <div className="w-2/3">
+    <div className="md:max-w-4xl mx-auto p-12 md:flex">
+      <div className="md:w-2/3">
         <img
           src={profilepic}
           alt="Sparsh Giri"

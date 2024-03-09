@@ -14,7 +14,7 @@ const Footer = () => {
     <footer className="bg-white border-t-2 border-gray-200 bottom-0 left-0 right-0">
       <div className="container mx-auto">
         <div className="flex flex-wrap justify-center border-b-2 border-gray-200 mt-4">
-          <div className="flex justify-center md:justify-start md:gap-16 p-4 md:mb-0 gap-28">
+          <div className="flex justify-center md:justify-start md:gap-16 p-4 md:mb-0">
             <span className="flex flex-col items-center text-center">
               <LiaCertificateSolid className="text-gray-600 mr-1 text-4xl md:text-6xl" />
               <span className="text-lg md:text-xl">India’s #1</span>

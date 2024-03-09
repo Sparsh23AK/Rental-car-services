@@ -14,7 +14,7 @@ export default function Header() {
         <Link to="/">
           <img
             src={myImage}
-            className="object-cover h-12 w-48 rounded-lg border border-black "
+            className="object-cover h-12 w-48 rounded-lg md:border border-black "
             alt="Carental Logo"
           />
         </Link>

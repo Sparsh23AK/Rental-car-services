@@ -109,16 +109,16 @@ const ViewCars = () => {
       {loading ? (
         <Loader /> // Render a loader while data is loading
       ) : (
-        <div className="relative w-full h-full">
+        <div className="relative">
           {fuelType === "Electric" ? (
             <div>
               <img
                 ref={mainImageRef}
                 alt="main-1"
                 src="https://images5.alphacoders.com/132/1323577.png"
-                className="w-full h-screen md:h-[75vh] object-cover"
+                className="w-full h-screen md:h-[75vh] object-cover hidden md:block"
               />
-              <div className="md:absolute top-36 left-20 p-10 leading-10">
+              <div className="md:absolute md:top-36 md:left-10 p-10 leading-10 z-10">
                 <h2 className="text-6xl font-bold">Electric Cars Bringing</h2>
                 <h2 className="text-4xl font-bold">Revolution to India</h2>
               </div>
@@ -126,7 +126,7 @@ const ViewCars = () => {
                 id="subImage"
                 alt="sub-1"
                 src="https://spn-sta.spinny.com/blog/20230907221752/Tata-Nexon-EV-5-jpg.webp?compress=true&quality=80&w=275&dpr=2.6"
-                className="md:absolute md:top-10 md:right-10 opacity-0 max-w-screen-sm transition-opacity duration-1000 object-cover rounded-3xl m-8"
+                className="md:absolute md:top-10 md:right-1 opacity-0 md:max-w-screen-md transition-opacity duration-1000 object-cover md:rounded-3xl md:m-8"
               />
             </div>
           ) : (
@@ -135,7 +135,7 @@ const ViewCars = () => {
                 ref={mainImageRef}
                 alt="main-1"
                 src="https://www.avis.co.in/images/carrental4.webp"
-                className="w-full h-screen md:h-[75vh] object-cover opacity-95"
+                className="w-full h-screen md:h-[75vh] object-cover opacity-95 hidden md:block"
               />
               <div className="md:absolute top-36 left-20 p-10 leading-10 text-white bg-orange-400 md:rounded-full z-10 opacity-100">
                 <h2 className="text-4xl font-bold">
