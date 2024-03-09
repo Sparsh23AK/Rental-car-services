@@ -38,12 +38,15 @@ const ViewCar = () => {
     date: "",
     phoneNumber: "+91 ",
     car: "",
-    user: currentUser._id,
+    user: "",
   });
 
   useEffect(() => {
     setLoading(true);
     fetchCarById(id);
+    if(currentUser){
+      setCurrentUser();
+    }
   }, [id, allCars]);
 
   useEffect(() => {
@@ -100,6 +103,12 @@ const ViewCar = () => {
       }
     }
   };
+  const setCurrentUser =  () =>{
+    setFormData({
+      ...formData,
+      user: currentUser._id
+    });
+  }
 
   const fetchCarById = async (id) => {
     try {
