@@ -13,7 +13,7 @@ import cors from "cors";
 dotenv.config();
 
 const app = express();
-// app.use(cors({origin : "https://carentalv-1.onrender.com"}));
+app.use(cors({origin : "https://carentalv-1.onrender.com"}));
 
 mongoose
   .connect(process.env.MongoDbUri)
@@ -27,8 +27,6 @@ mongoose
 const __dirname = path.resolve();
 //for server to initialize
 app.use(express.static(path.join(__dirname, '/client/dist')));
-
-
 
 app.listen(3000, () => {
   console.log("Server running at port 3000.");
